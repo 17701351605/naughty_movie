@@ -9,6 +9,7 @@ import lombok.Data;
 @TableName("base_data")
 public class BaseData {
 
+    /**主键ID*/
     @TableId(type = IdType.AUTO)
     private Integer id;
 

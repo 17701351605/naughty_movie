@@ -18,7 +18,7 @@
         function search() {
             var index = layer.load(1, {shade: 0.2});
             $.post("<%=request.getContextPath()%>/movie/show",
-                {"page":$("#page").val()},
+               /* {"page":$("#page").val()}*/
                 $("#fm").serialize(),
                 function (data) {
                     if (data.code != 200) {
@@ -36,34 +36,44 @@
                         html += "<td>" + movie.longTime + "</td>";
                         html += "<td>" + movie.topTime + "</td>";
                         html +=	"<td>";
-                        //管理员 登录
-                        if (${user.level == 1}) {
-
-                        }
+                     /*   if (${user.level == 1}) {*/
+                            html += "<input type = 'button' value = '修改' onclick = 'update("+movie.id +")'/>";
+                            html += "<input type = 'button' value = '删除' onclick = 'del("+movie.id +")'/>";
+                      /*  }*/
+                        html +=	"</td>";
                         html += "</tr>";
                     }
                     $("#tbd").html(html);
                 });
         }
-
-        function myMovie(){
-            location.href = "<%=request.getContextPath()%>/movie/toShow"
-        }
-        function upd(id) {
-            location.href = "<%=request.getContextPath()%>/user/toUpd?id=" + id;
-
-        }
-
-        function del(id) {
-            $.post("<%=request.getContextPath()%>/user/delete",
-                {"id": id},
-                function (data) {
+        //删除
+        function del(id){
+            var index = layer.load(1, {shade: 0.2});
+            $.post("<%=request.getContextPath()%>/movie/del/",
+                {"id":id,"isDel":0},
+                function(data){
                     if (data.code != 200) {
-                        alert(data.msg);
+                        layer.msg(data.msg);
+                        layer.close(index);
                         return;
                     }
-                    location.href = "<%=request.getContextPath()%>/user/toShow";
-                })
+                    layer.msg(data.msg, {icon: 6, time: 2000},
+                        function(){
+                            window.location.href="<%=request.getContextPath()%>/movie/toMovieShow";
+                            layer.close(index);
+                        });
+                });
+        }
+        //修改
+        function update(id) {
+            layer.open({
+                type: 2,
+                title: '修改',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['480px', '90%'],
+                content:"<%=request.getContextPath()%>/movie/toUpdate/"+id,
+            });
         }
 
         function selectMovie() {

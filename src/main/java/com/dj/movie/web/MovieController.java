@@ -2,6 +2,7 @@ package com.dj.movie.web;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dj.movie.config.UserQuery;
 import com.dj.movie.mapper.MovieMapper;
 import com.dj.movie.pojo.Movie;
 import com.dj.movie.pojo.ResultModel;
@@ -15,6 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 基础列表展示
+ */
+
 @RestController
 @RequestMapping("/movie/")
 public class MovieController {
@@ -23,15 +28,13 @@ public class MovieController {
     private MovieService movieService;
 
     @RequestMapping("show")
-    public ResultModel show(Movie movie, Integer pageNo){
+    public ResultModel show(Movie movie, UserQuery query){
         try{
-            IPage<Movie> page = new Page<>(pageNo, 2);
-            IPage<Movie> pageInfo = movieService.page(page);
-            List<Movie> movieList = movieService.findMovieAll(movie);
-            Map<String, Object> map = new HashMap<>();
-            map.put("movieList", pageInfo.getRecords());
-            map.put("pages", pageInfo.getPages());
-            return new ResultModel().success(movieList);
+            Map<String,Object> map = new HashMap<>();
+            List<Movie> movieList = movieService.findMovieAll(query);
+            map.put("pages",query.getPages());
+            map.put("movieList", movieList);
+            return new ResultModel().success(map);
         }catch (Exception e){
             e.printStackTrace();
             return new ResultModel().error("异常");

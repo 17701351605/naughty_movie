@@ -18,7 +18,6 @@
         function search() {
             var index = layer.load(1, {shade: 0.2});
             $.post("<%=request.getContextPath()%>/movie/show",
-                {"page":$("#page").val()},
                 $("#fm").serialize(),
                 function (data) {
                     if (data.code != 200) {
@@ -26,7 +25,8 @@
                     }
                     layer.close(index);
                     var html = "";
-                    var movieList = data.data;
+                    var pageHtml = "";
+                    var movieList = data.data.movieList;
                     for (var i = 0; i < movieList.length; i++) {
                         var movie = movieList[i];
                         html += "<tr>";
@@ -38,8 +38,11 @@
                         html += "</tr>";
                     }
                     $("#tbd").html(html);
+                    pageHtml += "<input type = 'button' value = '上一页' onclick = 'page(0," + data.data.pages + ")'/>";
+                    pageHtml += "<input type = 'button' value = '下一页' onclick = 'page(1," + data.data.pages + ")'/>";
+                    $("#pageDiv").html(pageHtml);
                 });
-        }
+            }
 
         function myMovie(){
             location.href = "<%=request.getContextPath()%>/movie/toShow"
@@ -70,14 +73,14 @@
             var page = $("#pageNo").val();
             if (temp == 0) {
                 if (parseInt(page) - 1 < 1) {
-                    alert("已是首页");
+                    layer.alert("已是首页",{icon : 6,time:2000});
                     return;
                 }
                 $("#pageNo").val(parseInt(page) - 1);
             }
             if (temp == 1) {
                 if (parseInt(page) + 1 > pages) {
-                    alert("已经尾页了");
+                    layer.alert("已经尾页了", {icon : 5,time:2000});
                     return;
                 }
                 $("#pageNo").val(parseInt(page) + 1);

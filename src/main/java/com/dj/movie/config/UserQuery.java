@@ -1,0 +1,16 @@
+package com.dj.movie.config;
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class UserQuery implements Serializable {
+
+    private Integer pageNo = 1;
+
+    private Integer pageSize = 2;
+
+    private Integer pages;
+
+}

@@ -10,17 +10,21 @@
 <head>
     <title>Title</title>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
     <script type="text/javascript">
         $(function(){
             search();
         })
         function search() {
+            var index = layer.load(1, {shade: 0.2});
             $.post("<%=request.getContextPath()%>/movie/show",
+                {"page":$("#page").val()},
                 $("#fm").serialize(),
                 function (data) {
                     if (data.code != 200) {
-                        alert(data.mag);
+                        layer.alert(data.msg);
                     }
+                    layer.close(index);
                     var html = "";
                     var movieList = data.data;
                     for (var i = 0; i < movieList.length; i++) {
@@ -37,10 +41,9 @@
                 });
         }
 
-        /* function add() {
-          location.href = "<%=request.getContextPath()%>/user/toAdd";
-
-           }*/
+        function myMovie(){
+            location.href = "<%=request.getContextPath()%>/movie/toShow"
+        }
         function upd(id) {
             location.href = "<%=request.getContextPath()%>/user/toUpd?id=" + id;
 
@@ -84,7 +87,7 @@
     </script>
 
 </head>
-<input type="button" value="我的影票"/>
+<input type="button" value="我的影票" onclick="myMovie()"/>
 <body style="text-align:center">
 <form id="fm">
     <input type="hidden" name="pageNo" value="1" id="pageNo"/>

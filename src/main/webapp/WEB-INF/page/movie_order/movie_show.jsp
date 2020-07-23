@@ -42,7 +42,6 @@
                                 html += "<td>已退票</td>"
                             }
                         }
-
                         html += "</tr>"
                     }
                     $("#tbd").html(html);

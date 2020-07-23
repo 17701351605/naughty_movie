@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,8 +25,11 @@ public class UserOrder {
     /** 电影名称*/
     private String movieName;
 
+    /** 电影播放厅*/
+    private Integer playHall;
+
     /** 购买总价*/
-    private Double prices;
+    private BigDecimal prices;
 
     /** 购买数量*/
     private Integer buyNumber;

@@ -10,4 +10,8 @@ import java.util.List;
 public interface UserOrderService extends IService<UserOrder> {
 
     IPage<UserOrder> selectAllByUserId(IPage<UserOrder> orderPage, Integer id) throws Exception;
+
+    void updateUserOrderByStatus(Integer status, Integer id) throws Exception;
+
+    UserOrder findById(Integer id) throws Exception;
 }

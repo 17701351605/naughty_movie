@@ -21,4 +21,14 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
     public IPage<UserOrder> selectAllByUserId(IPage<UserOrder> orderPage, Integer id) throws Exception {
         return userOrderMapper.selectAllByUserId(orderPage,id);
     }
+
+    @Override
+    public void updateUserOrderByStatus(Integer status, Integer id) throws Exception {
+        userOrderMapper.updateUserOrderByStatus(status,id);
+    }
+
+    @Override
+    public UserOrder findById(Integer id) throws Exception {
+        return userOrderMapper.findById(id);
+    }
 }

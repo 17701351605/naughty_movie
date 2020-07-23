@@ -35,7 +35,14 @@
                         html += "<td>"+m.prices+"</td>"
                         html += "<td>"+m.buyNumber+"</td>"
                         html += "<td>"+m.createTime+"</td>"
-                        html += "<td><input type = 'button' value = '退票' onclick='del("+m.id+")'/></td>"
+                        if (m.status == 1) {
+                            html += "<td><input type = 'button' value = '退票' onclick='del("+m.id+")'/></td>"
+                        } else {
+                            if (m.status ==2) {
+                                html += "<td>已退票</td>"
+                            }
+                        }
+
                         html += "</tr>"
                     }
                     $("#tbd").html(html);
@@ -66,7 +73,7 @@
         //退票
         function del(id){
             var index = layer.load(2, {shade: 0.3});
-            $.post("<%=request.getContextPath()%>/myMovie/del",
+            $.post("<%=request.getContextPath()%>/userMovie/del",
                 {"id":id},
                 function(data){
                     if(data.code != 200){
@@ -92,6 +99,7 @@
         <th>用户名</th>
         <%--<th>电影Id</th>--%>
         <th>电影名</th>
+        <th>价格</th>
         <th>购买数量</th>
         <th>购买时间</th>
         <th>操作</th>

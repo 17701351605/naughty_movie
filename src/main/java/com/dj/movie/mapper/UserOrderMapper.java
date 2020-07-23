@@ -13,4 +13,7 @@ public interface UserOrderMapper extends BaseMapper<UserOrder> {
     //查找我的订单
    IPage<UserOrder> selectAllByUserId(IPage<UserOrder> orderPage, @Param("id") Integer id) throws DataAccessException;
 
+   void updateUserOrderByStatus(@Param("status")Integer status,@Param("id")Integer id)throws DataAccessException;
+
+   UserOrder findById(Integer id) throws DataAccessException;
 }

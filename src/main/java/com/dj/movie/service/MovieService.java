@@ -5,6 +5,7 @@ import com.dj.movie.config.UserQuery;
 import com.dj.movie.pojo.Movie;
 import java.util.List;
 
+
 /**
  * @author CYS
  */
@@ -17,5 +18,7 @@ public interface MovieService extends IService<Movie> {
 
 
 
+
+    Movie findMovieByMovieId(Integer id) throws Exception;
 
 }

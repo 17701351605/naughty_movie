@@ -9,7 +9,6 @@ import com.dj.movie.pojo.Movie;
 import com.dj.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
@@ -39,5 +38,10 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
         query.setPages((int) pageInfo.getPages());
         List<Movie> moviesList = pageInfo.getRecords();
         return moviesList;
+    }
+
+    @Override
+    public Movie findMovieByMovieId(Integer id) throws Exception {
+        return movieMapper.findMovieByMovieId(id);
     }
 }

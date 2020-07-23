@@ -72,7 +72,7 @@
         //退票
         function del(id){
             var index = layer.load(2, {shade: 0.3});
-            $.post("<%=request.getContextPath()%>/userOrder/del",
+            $.post("<%=request.getContextPath()%>/userorder/del",
                 {"id":id},
                 function(data){
                     if(data.code != 200){

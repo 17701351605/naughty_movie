@@ -114,9 +114,6 @@ public class UserOrderController {
             //如果当前天小于电影开始的天可以退票
             if (localDateTime.getDayOfMonth() < movieOffice.getStartTime().getDayOfMonth()) {
                 userOrderService.updateUserOrderAndUpdateMovieOffice(id,movieOffice,movie);
-               /* userOrderService.updateUserOrderByStatus(2,id);
-                movieOffice.setSeating(movieOffice.getSeating() + movie.getBuyNumber());
-                movieOfficeService.updateById(movieOffice);*/
                 return new ResultModel<>().success("退票成功");
             }
             if (localDateTime.getDayOfMonth() == movieOffice.getStartTime().getDayOfMonth()) {
@@ -125,9 +122,6 @@ public class UserOrderController {
                 }
             }
             userOrderService.updateUserOrderAndUpdateMovieOffice(id,movieOffice,movie);
-            /*userOrderService.updateUserOrderByStatus(2,id);
-            movieOffice.setSeating(movieOffice.getSeating() + movie.getBuyNumber());
-            movieOfficeService.updateById(movieOffice);*/
             return new ResultModel<>().success("退票成功");
         } catch (Exception e) {
             e.printStackTrace();

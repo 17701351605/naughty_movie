@@ -42,5 +42,7 @@ public class Movie {
     /** 0删除，1不删除*/
     private Integer isDel;
 
+    private String baseName;
+
 
 }

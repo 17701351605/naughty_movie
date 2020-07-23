@@ -11,4 +11,9 @@ public class MoviePageController {
     public String toShow() {
         return "movie_order/movie_show";
     }
+
+    @RequestMapping("toMovieShow")
+    private String toMovieShow(){
+        return "movie/show";
+    }
 }

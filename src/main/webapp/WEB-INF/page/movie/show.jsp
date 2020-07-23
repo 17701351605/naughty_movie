@@ -35,6 +35,11 @@
                         html += "<td>" + movie.baseName + "</td>";
                         html += "<td>" + movie.longTime + "</td>";
                         html += "<td>" + movie.topTime + "</td>";
+                        html +=	"<td>";
+                        //管理员 登录
+                        if (${user.level == 1}) {
+
+                        }
                         html += "</tr>";
                     }
                     $("#tbd").html(html);

@@ -2,5 +2,8 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.movie.mapper.MovieOfficeMapper">
 
+    <sql id="M">
+        id,movie_id,movie_name,play_hall,price,seating,start_time,is_del
+    </sql>
 
 </mapper>

@@ -18,11 +18,15 @@ public class UserOrder {
     /** 用户id*/
     private Integer userId;
 
+    private String userName;
     /** 电影UUID*/
     private String movieId;
 
     /** 电影名称*/
     private String movieName;
+
+    /** 电影播放厅*/
+    private Integer playHall;
 
     /** 购买总价*/
     private BigDecimal prices;
@@ -35,4 +39,6 @@ public class UserOrder {
 
     /** 是否退票，0退票，1未退票*/
     private Integer isDel;
+    /** 1可以退票,2退票成功*/
+    private Integer status;
 }

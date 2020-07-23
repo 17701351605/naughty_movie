@@ -1,13 +1,20 @@
 package com.dj.movie.service;
 
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dj.movie.pojo.MovieOffice;
-import com.dj.movie.pojo.User;
 import com.dj.movie.pojo.UserOrder;
 
 import java.math.BigDecimal;
 
 public interface UserOrderService extends IService<UserOrder> {
+
+    IPage<UserOrder> selectAllByUserId(IPage<UserOrder> orderPage, Integer id) throws Exception;
+
+    void updateUserOrderByStatus(Integer status, Integer id) throws Exception;
+
+    UserOrder findById(Integer id) throws Exception;
 
 
     /**

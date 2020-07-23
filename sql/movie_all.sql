@@ -35,8 +35,7 @@ CREATE TABLE `movie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `movie_id` varchar(255) NOT NULL COMMENT '电影UUID',
   `movie_name` varchar(255) DEFAULT NULL COMMENT '电影名称',
-  `
-actor_name` varchar(255) DEFAULT NULL COMMENT '演员名单',
+  `actor_name` varchar(255) DEFAULT NULL COMMENT '演员名单',
   `movie_type` int(11) DEFAULT NULL COMMENT '电影类型',
   `long_time` varchar(255) DEFAULT NULL COMMENT '电影片长',
   `top_time` datetime DEFAULT NULL COMMENT '上线时间',

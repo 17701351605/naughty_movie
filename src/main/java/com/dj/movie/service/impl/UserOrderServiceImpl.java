@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.movie.mapper.MovieOfficeMapper;
 import com.dj.movie.mapper.UserOrderMapper;
+import com.dj.movie.pojo.Movie;
 import com.dj.movie.pojo.MovieOffice;
 import com.dj.movie.pojo.UserOrder;
 import com.dj.movie.service.UserOrderService;
@@ -53,9 +54,12 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
 
     }
 
-
-
-
+    @Override
+    public void updateUserOrderAndUpdateMovieOffice(Integer id, MovieOffice movieOffice, UserOrder movie) throws Exception {
+        userOrderMapper.updateUserOrderByStatus(2,id);
+        movieOffice.setSeating(movieOffice.getSeating() + movie.getBuyNumber());
+        movieOfficeMapper.updateById(movieOffice);
+    }
 
 
     @Override

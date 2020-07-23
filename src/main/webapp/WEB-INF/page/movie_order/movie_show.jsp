@@ -20,7 +20,7 @@
         function show(){
             var index = layer.load(1, {shade: 0.2});
 
-            $.post("<%=request.getContextPath()%>/userOrder/list",
+            $.post("<%=request.getContextPath()%>/userorder/list",
                 {"page":$("#page").val(),"a":1},
                 function(data){
                     layer.close(index);

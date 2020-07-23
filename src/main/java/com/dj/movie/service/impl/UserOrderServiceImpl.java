@@ -55,8 +55,7 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
 
 
 
-    @Autowired
-    private UserOrderMapper userOrderMapper;
+
 
 
     @Override

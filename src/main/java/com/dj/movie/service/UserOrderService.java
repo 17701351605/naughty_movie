@@ -1,7 +1,12 @@
 package com.dj.movie.service;
 
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.dj.movie.pojo.MovieOffice;
 import com.dj.movie.pojo.UserOrder;
+
+import java.math.BigDecimal;
 
 public interface UserOrderService extends IService<UserOrder> {
 

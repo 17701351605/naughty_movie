@@ -1,20 +1,8 @@
 package com.dj.movie.web;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dj.movie.pojo.Movie;
-import com.dj.movie.pojo.MovieComment;
-import com.dj.movie.pojo.MovieOffice;
-import com.dj.movie.pojo.ResultModel;
-import com.dj.movie.service.MovieCommentService;
-import com.dj.movie.service.MovieOfficeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +10,27 @@ import java.util.Map;
 @RestController
 @RequestMapping("/movie/")
 public class MovieController {
+
+    @Autowired
+    private MovieService movieService;
+
+    @RequestMapping("show")
+    public ResultModel show(Movie movie, Integer pageNo){
+        try{
+            IPage<Movie> page = new Page<>(pageNo, 2);
+            IPage<Movie> pageInfo = movieService.page(page);
+            List<Movie> movieList = movieService.findMovieAll(movie);
+            Map<String, Object> map = new HashMap<>();
+            map.put("movieList", pageInfo.getRecords());
+            map.put("pages", pageInfo.getPages());
+            return new ResultModel().success(movieList);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResultModel().error("异常");
+        }
+
+    }
+
 
     @Autowired
     private MovieCommentService movieCommentService;

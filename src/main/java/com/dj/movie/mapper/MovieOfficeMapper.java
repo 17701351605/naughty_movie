@@ -2,11 +2,7 @@ package com.dj.movie.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dj.movie.pojo.MovieOffice;
-
-import java.util.List;
-import java.util.zip.DataFormatException;
+import org.springframework.dao.DataAccessException;
 
 public interface MovieOfficeMapper extends BaseMapper<MovieOffice> {
-
-
 }

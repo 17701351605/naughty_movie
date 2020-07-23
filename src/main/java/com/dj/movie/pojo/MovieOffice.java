@@ -1,6 +1,7 @@
 package com.dj.movie.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -30,6 +31,7 @@ public class MovieOffice {
     private BigDecimal price;
 
     /** 座位数*/
+    @TableField("seating")
     private Integer seating;
 
     /** 电影开始时间*/

@@ -31,4 +31,11 @@ public class MoviePageController {
     public String toMovieOffice() throws Exception {
         return "Movie/movie_office";
     }
+
+
+
+    @RequestMapping("toMovieShow")
+    private String toMovieShow(){
+        return "movie/show";
+    }
 }

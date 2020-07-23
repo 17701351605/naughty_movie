@@ -12,5 +12,7 @@ import java.util.List;
 
 @Service
 public class MovieOfficeServiceImpl extends ServiceImpl<MovieOfficeMapper, MovieOffice> implements MovieOfficeService {
+    @Autowired
+    private MovieOfficeMapper movieOfficeMapper;
 
 }

@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.movie.mapper.MovieMapper">
+    <sql id="movie">
+        id,
+        movie_id,
+        movie_name,
+        actor_name,
+        movie_type,
+        long_time,
+        top_time,
+        status,
+        is_del,
+    </sql>
+    <select id="findMovieAll" resultType="com.dj.movie.pojo.Movie">
+       SELECT
+            m.id,
+            m.movie_id,
+            m.movie_name,
+            m.movie_type,
+            m.actor_name,
+            m.long_time,
+            m.top_time,
+            m.status,
+            m.is_del,
+            b.id as base_id,
+            b.base_name
+            FROM movie m
+            LEFT JOIN base_data b on m.movie_type = b.id
+            where m.status = 1 and m.is_del = 1
+
+    </select>
 
 
 </mapper>

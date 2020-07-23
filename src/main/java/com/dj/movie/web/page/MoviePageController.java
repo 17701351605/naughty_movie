@@ -6,4 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/movie/")
 public class MoviePageController {
+
+    @RequestMapping("toShow")
+    public String toShow() {
+        return "movie_order/movie_show";
+    }
+
+    @RequestMapping("toMovieShow")
+    private String toMovieShow(){
+        return "movie/show";
+    }
 }

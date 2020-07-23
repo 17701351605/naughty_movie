@@ -1,6 +1,5 @@
 package com.dj.movie.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.movie.mapper.MovieOfficeMapper;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Service
 public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder> implements UserOrderService {
@@ -29,6 +27,7 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
      * @param movieOffice 电影场次信息
      * @param buyNum 购买数量
      * @param buyPrice 购买总价
+     * @author fzz
      */
     @Override
     public void addUserOrderAndUpdateMovieSeating(MovieOffice movieOffice, Integer buyNum, BigDecimal buyPrice,
@@ -36,6 +35,7 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
         UserOrder userOrder = new UserOrder();
         userOrder.setMovieId(movieOffice.getMovieId());
         userOrder.setMovieName(movieOffice.getMovieName());
+        userOrder.setPlayHall(movieOffice.getPlayHall());
         userOrder.setPrices(buyPrice);
         userOrder.setUserId(userId);
         userOrder.setBuyNumber(buyNum);
@@ -45,7 +45,7 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
 
         UpdateWrapper<MovieOffice> updateWrapper = new UpdateWrapper<>();
         updateWrapper.set("seating",movieOffice.getSeating()-buyNum);
-        updateWrapper.eq("movie_id",movieOffice.getMovieId());
+        updateWrapper.eq("id",movieOffice.getId());
         movieOfficeMapper.update(movieOffice,updateWrapper);
 
     }

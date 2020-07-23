@@ -24,6 +24,9 @@ public class UserOrder {
     /** 电影名称*/
     private String movieName;
 
+    /** 电影播放厅*/
+    private Integer playHall;
+
     /** 购买总价*/
     private BigDecimal prices;
 

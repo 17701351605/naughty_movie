@@ -4,6 +4,10 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * @author CYS
+ * 连表分页查询
+ */
 @Data
 public class UserQuery implements Serializable {
 

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,6 +15,7 @@ public class MoviePageController {
 
     @Autowired
     private MovieService movieService;
+
 
     /**
      * 去电影详情页面
@@ -41,9 +41,6 @@ public class MoviePageController {
         return "Movie/movie_office";
     }
 
-
-    @Autowired
-    private MovieService movieService;
 
     @RequestMapping("toMovieShow")
     private String toMovieShow(){

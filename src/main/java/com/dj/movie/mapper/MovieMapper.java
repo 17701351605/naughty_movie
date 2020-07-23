@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.zip.DataFormatException;
 
 
 /**
@@ -14,7 +15,8 @@ import java.util.List;
  */
 public interface MovieMapper extends BaseMapper<Movie> {
 
-
     List<Movie> findMovieAll(Movie movie) throws DataAccessException;
+
+    Movie findMovieByMovieId(Integer id) throws DataFormatException;
 
 }

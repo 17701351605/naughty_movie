@@ -27,9 +27,6 @@
                         html += "<td>" + movie.id + "</td>";
                         html += "<td>" + movie.remark + "</td>";
                         html += "<td>" + movie.createTime + "</td>";
-                        html += "<td>";
-                        html += "<input type = 'button' value = '点赞' onclick = 'toLike(" + movie.id + ")'/>"
-                        html += "</td>";
                         html += "</tr>";
                     }
                     $("#tb").html(html);
@@ -49,17 +46,36 @@
                     return;
                 })
         }
+
+        $(document).ready(function(){
+            $("#show").click(function(){
+                $("#testDiv").show();
+            });
+            $("#hide").click(function(){
+                $("#testDiv").hide();
+            });
+
+        })
     </script>
 </head>
 <body style="text-align: center">
 <table  align="center">
+    电影名称:${movie.movieName} <br/>
+    电影片长：${movie.longTime} <br/>
+    上线时间：${movie.topTime}<br/>
+    <input type = 'button' value = '点赞' onclick = 'toLike(" + movie.id + ")'/>
+
+    <button id="hide">隐藏</button>
+    <button id="show">评论</button><br/>
+
     <tr>
-        <td>id</td>
-        <td>电影名称</td>
-        <td>上线时间</td>
-        <td>操作</td>
+        <td>相关评论:</td>
     </tr>
     <tbody id="tb"></tbody>
 </table>
+<div id="testDiv" style="display:none">
+    评论：<input type="text" name="remark" id="remark"/>
+    <input type='button' value='评论提交' onclick='discuss()'/>
+</div>
 </body>
 </html>

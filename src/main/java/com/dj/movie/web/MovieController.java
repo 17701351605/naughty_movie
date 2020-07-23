@@ -1,9 +1,25 @@
 package com.dj.movie.web;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dj.movie.pojo.Movie;
+import com.dj.movie.pojo.MovieComment;
+import com.dj.movie.pojo.MovieOffice;
+import com.dj.movie.pojo.ResultModel;
+import com.dj.movie.service.MovieCommentService;
+import com.dj.movie.service.MovieOfficeService;
+import com.dj.movie.service.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +29,13 @@ public class MovieController {
 
     @Autowired
     private MovieService movieService;
+
+    @Autowired
+    private MovieCommentService movieCommentService;
+
+    @Autowired
+    private MovieOfficeService movieOfficeService;
+
 
     @RequestMapping("show")
     public ResultModel show(Movie movie, Integer pageNo){
@@ -30,13 +53,6 @@ public class MovieController {
         }
 
     }
-
-
-    @Autowired
-    private MovieCommentService movieCommentService;
-
-    @Autowired
-    private MovieOfficeService movieOfficeService;
 
     /**
      * 电影详情页面展示
@@ -57,7 +73,6 @@ public class MovieController {
             return new ResultModel<Object>().error("服务器处理异常，请稍后重试");
         }
     }
-
 
     /**
      * 电影场次展示

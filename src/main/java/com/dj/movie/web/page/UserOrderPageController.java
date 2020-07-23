@@ -21,7 +21,7 @@ public class UserOrderPageController {
 
     @RequestMapping("toShow")
     public String toShow() {
-        return "movie_order/movie_show";
+        return "user_order/movie_show";
     }
 
     /**
@@ -38,7 +38,7 @@ public class UserOrderPageController {
         model.addAttribute("movie",movieOfficeService.getById(id));
         //从数据库获取厅信息
         model.addAttribute("movieOfficeList",baseDataService.list(queryWrapper));
-        return "movie_order/buy_ticket";
+        return "user_order/buy_ticket";
     }
 
 }

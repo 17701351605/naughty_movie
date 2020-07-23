@@ -41,7 +41,10 @@ public class MoviePageController {
         return "Movie/movie_office";
     }
 
-
+    /**
+     * 跳转初次登陆展示页面
+     * @author: CYS
+     */
     @RequestMapping("toMovieShow")
     private String toMovieShow(){
         return "movie/show";

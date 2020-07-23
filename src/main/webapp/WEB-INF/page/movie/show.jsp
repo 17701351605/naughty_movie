@@ -45,7 +45,7 @@
             }
 
         function myMovie(){
-            location.href = "<%=request.getContextPath()%>/movie/toShow"
+            location.href = "<%=request.getContextPath()%>/userOrder/toShow"
         }
         function upd(id) {
             location.href = "<%=request.getContextPath()%>/user/toUpd?id=" + id;

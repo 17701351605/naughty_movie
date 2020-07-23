@@ -29,7 +29,7 @@
             submitHandler: function() {
                 var index = layer.load(1, {shade: 0.2});
                 $.post(
-                    "<%=request.getContextPath()%>/userorder/addOrder",
+                    "<%=request.getContextPath()%>/userOrder/addOrder",
                     $("#fm").serialize(),
                     function(data){
                         if (data.code != 200) {
@@ -39,7 +39,7 @@
                         }
                         layer.msg(data.msg, {icon: 6, time: 2000},
                             function(){
-                                parent.location.href="<%=request.getContextPath()%>/movie/toShow";
+                                parent.location.href="<%=request.getContextPath()%>/movie/toMovieShow";
                                 layer.close(index);
                             });
                     });
@@ -75,11 +75,11 @@
 
         /** id 播放厅的主键id */
         function tuanGou(id) {
-            window.location.href="<%=request.getContextPath()%>/userorder/tuanGou/"+id;
+            window.location.href="<%=request.getContextPath()%>/userOrder/tuanGou/"+id;
         }
         /** 剩余票数和总票数相等 并且登录人为普通人 显示团购按钮 */
         //别删
-       /* if (movie.seating == seating && ${user.id == 0}){
+       /* if (movie.seating == 50 && ${user.id == 0}){
             html += "<input type='button' onclick='tuanGou()' value='团购' />";
         }*/
     </script>

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * 拦截器配置
  */
-@Configuration
+//@Configuration
 public class WebConfiguration implements WebMvcConfigurer {
 
     @Autowired
@@ -24,9 +24,9 @@ public class WebConfiguration implements WebMvcConfigurer {
         //向容器注册拦截器
         InterceptorRegistration interceptorRegistration = registry.addInterceptor(myInterceptor);
         //拦截请求
-        /*interceptorRegistration.addPathPatterns("/**");*/
+        interceptorRegistration.addPathPatterns("/**");
         //放过请求
         interceptorRegistration.excludePathPatterns("/user/toLogin");
-
+        interceptorRegistration.excludePathPatterns("/user/login");
     }
 }

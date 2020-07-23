@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-
+注册页面
 </body>
 </html>

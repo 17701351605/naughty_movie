@@ -19,35 +19,22 @@
         //将窗口路径与加载路径同步
         window.top.location = document.URL;
     }
-    $().ready(function () {
-        $("#fm").validate({
-            rules:{
-                username:{
-                    required: true,
-                },
-                password:{
-                    required: true,
-                }
-            },
-            messages:{
-                username: "请输入用户名",
-                password: "请输入密码",
-                email:"请输入正确的电子邮箱"
-            }
-        });
-    });
-    $.validator.setDefaults({
-        submitHandler:function () {
-            $.post("<%=request.getContextPath()%>/user/login",$("#fm").serialize(),
-                function (data) {
 
-            });
-        }
-    });
 
     function toRegister() {
-
+        layer.open({
+            type: 2,
+            title: '注册用户',
+            shadeClose: true,
+            shade: 0.4,
+            area: ['500px', '80%'],
+            content: '<%=request.getContextPath()%>/user/toRegister'
+        });
     }
+    function toLogin() {
+        window.location.href="<%=request.getContextPath()%>/user/toLogin";
+    }
+
 </script>
 <style>
     .error{
@@ -56,12 +43,11 @@
 </style>
 <body style="text-align: center">
 <form id="fm">
-    用户名：<input type="text" name="username"/><br/>
     邮箱：<input type="text" name="email"/><br/>
-    密码：<input type="text" name="password"/><br/>
+    验证码：<input type="text" name="code"/><br/>
         <input type="submit" value="登录"/><br/>
+        <input type="button" value="账号登录" onclick="toLogin()"/><br/><br/>
         <input type="button" value="没有帐号？去添加" onclick="toRegister()"/><br/>
-
 </form>
 </body>
 </html>

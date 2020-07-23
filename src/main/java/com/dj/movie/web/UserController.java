@@ -27,8 +27,16 @@ public class UserController {
      */
     @RequestMapping("login")
     public ResultModel login(User user){
-
-        return null;
+        try {
+            User user1 = userService.findNameAndPwd(user);
+            if (null == user1){
+                return new ResultModel().error(0,"账户或密码有误，请重新输入");
+            }
+            return new ResultModel().success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error(e.getMessage());
+        }
     }
 
 

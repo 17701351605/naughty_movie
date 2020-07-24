@@ -15,4 +15,8 @@ public class MovieOfficeServiceImpl extends ServiceImpl<MovieOfficeMapper, Movie
     @Autowired
     private MovieOfficeMapper movieOfficeMapper;
 
+    @Override
+    public MovieOffice findMovieOficeById(Integer id) throws Exception {
+        return movieOfficeMapper.findMovieOficeById(id);
+    }
 }

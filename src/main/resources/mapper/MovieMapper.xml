@@ -39,6 +39,9 @@
     <select id="findMovieByMovieId" resultType="com.dj.movie.pojo.Movie">
         select <include refid="MOVIE"/> from movie where movie_id = #{movieId}
     </select>
+    <select id="findMovieById" resultType="com.dj.movie.pojo.Movie">
+        select m.*,m.top_time as top_time_show from movie  m where id = #{id}
+    </select>
 
 
 </mapper>

@@ -17,4 +17,6 @@ public class UserQuery implements Serializable {
 
     private Integer pages;
 
+    private Integer status;
+
 }

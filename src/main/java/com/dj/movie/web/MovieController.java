@@ -12,11 +12,14 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 基础列表展示
@@ -41,14 +44,20 @@ public class MovieController {
 
 
     @RequestMapping("show")
-    public ResultModel show(Movie movie, UserQuery query) {
-        try {
-            Map<String, Object> map = new HashMap<>();
+    public ResultModel show(Movie movie, UserQuery query/*, @SessionAttribute("user")User user*/){
+        try{
+          /*  //如果登录的是普通用户查状态为上架的
+            if (user.getLevel() == 0) {
+                query.setStatus(1);
+            } else {
+                query.setStatus(0);
+            }*/
+            Map<String,Object> map = new HashMap<>();
             List<Movie> movieList = movieService.findMovieAll(query);
-            map.put("pages", query.getPages());
+            map.put("pages",query.getPages());
             map.put("movieList", movieList);
             return new ResultModel().success(map);
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
             return new ResultModel().error("异常");
         }
@@ -103,6 +112,7 @@ public class MovieController {
      * @return
      * @author: zby
      * @date: 2020年7月23日
+     * @return
      */
     @RequestMapping("movieOfficeShow")
     public ResultModel<Object> movieOfficeShow(Integer mId, String startingTime, String endTime) {
@@ -195,6 +205,90 @@ public class MovieController {
             return new ResultModel<Object>().error("服务器处理异常，请稍后重试");
         }
     }
+    /**
+     * 修改
+     * @param
+     * @return
+     * @autor hwk
+     */
+    @RequestMapping("updateMovie")
+    public ResultModel updateMovie(Movie movie) {
+        try {
+            movieService.updateById(movie);
+            return new ResultModel().success("修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常,请稍后再试");
+        }
+    }
 
+
+    /**
+     * 增加电影
+     * @autor hwk
+     * @param movie
+     * @return
+     */
+    @RequestMapping("addMovie")
+    public ResultModel addMovie(Movie movie) {
+        try {
+            UUID uuid = UUID.randomUUID();
+            movie.setMovieId(uuid.toString().replace("-",""));
+            movieService.save(movie);
+            return new ResultModel().success("新增成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常,请稍后再试");
+        }
+
+    }
+
+    /**
+     * 删除
+     * @param
+     * @return
+     * @autor hwk
+     */
+    @RequestMapping("delOffice")
+    public ResultModel delOffice(MovieOffice movieOffice) {
+        try {
+            movieOfficeService.updateById(movieOffice);
+            return new ResultModel().success("删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常,请稍后再试");
+        }
+    }
+
+    /**
+     * 场次的修改
+     * @return
+     */
+    @RequestMapping("updateOffice")
+    public ResultModel updateOffice(MovieOffice movieOffice) {
+        try {
+            movieOfficeService.updateById(movieOffice);
+            return new ResultModel().success("修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常,请稍后再试");
+        }
+    }
+
+    /**
+     * 场次的增加
+     * @param movieOffice
+     * @return
+     */
+    @RequestMapping("addMovieOffice")
+    public ResultModel addMovieOffice(MovieOffice movieOffice) {
+        try {
+            movieOfficeService.save(movieOffice);
+            return new ResultModel().success("增加成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常,请稍后再试");
+        }
+    }
 }
 

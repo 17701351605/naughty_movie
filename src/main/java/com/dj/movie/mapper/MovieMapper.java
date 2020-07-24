@@ -32,4 +32,5 @@ public interface MovieMapper extends BaseMapper<Movie> {
 
     IPage<Movie> findMovieAll(IPage<Movie> page, @Param("query") UserQuery query);
 
+    Movie findMovieById(Integer id) throws DataAccessException;
 }

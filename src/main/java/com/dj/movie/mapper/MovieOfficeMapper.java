@@ -5,4 +5,6 @@ import com.dj.movie.pojo.MovieOffice;
 import org.springframework.dao.DataAccessException;
 
 public interface MovieOfficeMapper extends BaseMapper<MovieOffice> {
+
+    MovieOffice findMovieOficeById(Integer id) throws DataAccessException;
 }

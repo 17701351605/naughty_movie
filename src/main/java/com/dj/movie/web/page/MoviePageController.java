@@ -1,6 +1,8 @@
 package com.dj.movie.web.page;
 
+import com.dj.movie.pojo.BaseData;
 import com.dj.movie.pojo.Movie;
+import com.dj.movie.service.BaseDataService;
 import com.dj.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,12 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/movie/")
 public class MoviePageController {
 
     @Autowired
     private MovieService movieService;
+    @Autowired
+    private BaseDataService baseDataService;
 
 
     /**
@@ -49,11 +55,29 @@ public class MoviePageController {
     private String toMovieShow(){
         return "movie/show";
     }
+    /**
+     *去增加
+     * @author: hwk
+     */
+    @RequestMapping("toAdd")
+    private String toAdd(Model model) throws Exception{
+        List<BaseData> list = baseDataService.findAllByPId(1);
+        model.addAttribute("list",list);
+        return "movie/add";
+    }
 
     @RequestMapping("toUpdate/{id}")
-    public String toUpdate(@PathVariable Integer id, Model model){
-        Movie movie = movieService.getById(id);
+    public String toUpdate(@PathVariable Integer id, Model model) throws Exception{
+        Movie movie = movieService.findMovieById(id);
+        if (movie.getTopTimeShow() !=null) {
+            String substring = movie.getTopTimeShow().substring(0, 19);
+            movie.setTopTimeShow(substring);
+        }
+
         model.addAttribute("movie",movie);
+        List<BaseData> list = baseDataService.findAllByPId(1);
+
+        model.addAttribute("list",list);
         return "movie/update";
     }
 }

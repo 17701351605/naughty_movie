@@ -44,4 +44,9 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
     public Movie findMovieByMovieId(Integer id) throws Exception {
         return movieMapper.findMovieByMovieId(id);
     }
+
+    @Override
+    public Movie findMovieById(Integer id) throws Exception {
+        return movieMapper.findMovieById(id);
+    }
 }

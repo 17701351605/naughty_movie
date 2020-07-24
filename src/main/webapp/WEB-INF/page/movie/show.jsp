@@ -11,6 +11,8 @@
     <title>Title</title>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/jquery.validate.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/localization/messages_zh.js"></script>
     <script type="text/javascript">
         $(function(){
             search();
@@ -35,6 +37,18 @@
                         html += "<td>" + movie.baseName + "</td>";
                         html += "<td>" + movie.longTime + "</td>";
                         html += "<td>" + movie.topTime + "</td>";
+
+                        html +=	"<td>";
+                      /*  if (${user.level == 1}) {*/
+                            html += "<input type = 'button' value = '修改' onclick = 'update("+movie.id +")'/>";
+                            html += "<input type = 'button' value = '删除' onclick = 'del("+movie.id +")'/>";
+                        /*}*/
+                        if (movie.status==1) {
+                            html += "<input type = 'button' value = '下架' onclick = 'statuss(0,"+movie.id +")'/>";
+                        }else{
+                            html += "<input type = 'button' value = '上架' onclick = 'statuss(1,"+movie.id +")'/>";
+                        }
+                        html += "</td>";
                         html += "</tr>";
                     }
                     $("#tbd").html(html);
@@ -43,26 +57,75 @@
                     $("#pageDiv").html(pageHtml);
                 });
             }
+        //删除
+        function del(id){
+            var index = layer.load(1, {shade: 0.2});
+            $.post("<%=request.getContextPath()%>/movie/del/",
+                {"id":id,"isDel":0},
+                function(data){
+                    if (data.code != 200) {
+                        layer.msg(data.msg);
+                        layer.close(index);
+                        return;
+                    }
+                    layer.msg(data.msg, {icon: 6, time: 2000},
+                        function(){
+                            window.location.href="<%=request.getContextPath()%>/movie/toMovieShow";
+                            layer.close(index);
+                        });
+                });
+        }
 
+        //修改
+        function update(id) {
+            layer.open({
+                type: 2,
+                title: '修改',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['500px', '90%'],
+                content:"<%=request.getContextPath()%>/movie/toUpdate/"+id,
+            });
+        }
+        //上下架
+        function statuss(status, id){
+            var index = layer.load(1, {shade: 0.2});
+            $.post("<%=request.getContextPath()%>/movie/updateMovie",
+                {"id":id,"status":status},
+                function(data){
+                    if (data.code != 200) {
+                        layer.msg(data.msg);
+                        layer.close(index);
+                        return;
+                    }
+                    var msg= "";
+                    if (status == 0) {
+                        msg="下架成功"
+                    }else{
+                        msg="上架成功"
+                    }
+                    layer.msg(msg, {icon: 6, time: 2000},
+                        function(){
+                            window.location.href="<%=request.getContextPath()%>/movie/toMovieShow";
+                            layer.close(index);
+                        });
+                });
+        }
+        //添加
+        function addMovie() {
+            layer.open({
+                type: 2,
+                title: '添加',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['480px', '90%'],
+                content:"<%=request.getContextPath()%>/movie/toAdd",
+            });
+        }
         function myMovie(){
             location.href = "<%=request.getContextPath()%>/userOrder/toShow"
         }
-        function upd(id) {
-            location.href = "<%=request.getContextPath()%>/user/toUpd?id=" + id;
 
-        }
-
-        function del(id) {
-            $.post("<%=request.getContextPath()%>/user/delete",
-                {"id": id},
-                function (data) {
-                    if (data.code != 200) {
-                        alert(data.msg);
-                        return;
-                    }
-                    location.href = "<%=request.getContextPath()%>/user/toShow";
-                })
-        }
 
         function selectMovie() {
             $("#pageNo").val(1);
@@ -93,6 +156,9 @@
 <input type="button" value="我的影票" onclick="myMovie()"/>
 <body style="text-align:center">
 <form id="fm">
+    <c:if test="${user.level == 1}">
+        <input type="button" value='增加电影' onclick='addMovie()'/><br/>
+    </c:if>
     <input type="hidden" name="pageNo" value="1" id="pageNo"/>
     电影名称：<input type="text" name="movieName"/><br/>
     类型：

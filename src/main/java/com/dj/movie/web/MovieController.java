@@ -2,10 +2,7 @@ package com.dj.movie.web;
 
 import com.dj.movie.config.UserQuery;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dj.movie.pojo.Movie;
-import com.dj.movie.pojo.MovieComment;
-import com.dj.movie.pojo.MovieOffice;
-import com.dj.movie.pojo.ResultModel;
+import com.dj.movie.pojo.*;
 import com.dj.movie.service.MovieCommentService;
 import com.dj.movie.service.MovieOfficeService;
 import com.dj.movie.service.MovieService;
@@ -14,12 +11,14 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 基础列表展示
@@ -41,8 +40,14 @@ public class MovieController {
 
 
     @RequestMapping("show")
-    public ResultModel show(Movie movie, UserQuery query){
+    public ResultModel show(Movie movie, UserQuery query/*, @SessionAttribute("user")User user*/){
         try{
+          /*  //如果登录的是普通用户查状态为上架的
+            if (user.getLevel() == 0) {
+                query.setStatus(1);
+            } else {
+                query.setStatus(0);
+            }*/
             Map<String,Object> map = new HashMap<>();
             List<Movie> movieList = movieService.findMovieAll(query);
             map.put("pages",query.getPages());
@@ -155,6 +160,42 @@ public class MovieController {
             return new ResultModel<Object>().error("服务器处理异常，请稍后重试");
         }
     }
+    /**
+     * 修改
+     * @param
+     * @return
+     * @autor hwk
+     */
+    @RequestMapping("updateMovie")
+    public ResultModel updateMovie(Movie movie) {
+        try {
+            movieService.updateById(movie);
+            return new ResultModel().success("修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常,请稍后再试");
+        }
+    }
 
+
+    /**
+     * 增加电影
+     * @autor hwk
+     * @param movie
+     * @return
+     */
+    @RequestMapping("addMovie")
+    public ResultModel addMovie(Movie movie) {
+        try {
+            UUID uuid = UUID.randomUUID();
+            movie.setMovieId(uuid.toString().replace("-",""));
+            movieService.save(movie);
+            return new ResultModel().success("修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常,请稍后再试");
+        }
+
+    }
 }
 

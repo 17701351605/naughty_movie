@@ -20,7 +20,7 @@
         function show(){
             var index = layer.load(1, {shade: 0.2});
 
-            $.post("<%=request.getContextPath()%>/userMovie/list",
+            $.post("<%=request.getContextPath()%>/userorder/list",
                 {"page":$("#page").val(),"a":1},
                 function(data){
                     layer.close(index);
@@ -72,7 +72,7 @@
         //退票
         function del(id){
             var index = layer.load(2, {shade: 0.3});
-            $.post("<%=request.getContextPath()%>/userMovie/del",
+            $.post("<%=request.getContextPath()%>/userorder/del",
                 {"id":id},
                 function(data){
                     if(data.code != 200){

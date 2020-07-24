@@ -2,8 +2,14 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.movie.mapper.MovieOfficeMapper">
 
+    <sql id="OFFICE">
+        id,movie_id,movie_name,play_hall,price,start_time,is_del
+    </sql>
     <sql id="M">
         id,movie_id,movie_name,play_hall,price,seating,start_time,is_del
     </sql>
+    <select id="findMovieOficeById" resultType="com.dj.movie.pojo.MovieOffice">
+        select m.*  from movie_office m where id = #{id}
+    </select>
 
 </mapper>

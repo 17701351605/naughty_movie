@@ -37,7 +37,7 @@ public class User {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8") //返回前台格式
     private LocalDateTime codeTime;
 
-    /** 级别 */
+    /** 级别 0普通1管理*/
     private Integer level;
 
     /** 0未激活，1激活*/

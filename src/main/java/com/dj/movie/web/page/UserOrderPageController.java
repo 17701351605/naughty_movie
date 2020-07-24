@@ -2,19 +2,15 @@ package com.dj.movie.web.page;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dj.movie.pojo.BaseData;
-import com.dj.movie.pojo.MovieOffice;
 import com.dj.movie.service.BaseDataService;
 import com.dj.movie.service.MovieOfficeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 @Controller
-@RequestMapping("/userorder/")
+@RequestMapping("/userOrder/")
 public class UserOrderPageController {
 
     @Autowired
@@ -22,6 +18,11 @@ public class UserOrderPageController {
 
     @Autowired
     private BaseDataService baseDataService;
+
+    @RequestMapping("toShow")
+    public String toShow() {
+        return "user_order/movie_show";
+    }
 
     /**
      * 去购票
@@ -37,8 +38,7 @@ public class UserOrderPageController {
         model.addAttribute("movie",movieOfficeService.getById(id));
         //从数据库获取厅信息
         model.addAttribute("movieOfficeList",baseDataService.list(queryWrapper));
-
-        return "buy_ticket";
+        return "user_order/buy_ticket";
     }
 
 }

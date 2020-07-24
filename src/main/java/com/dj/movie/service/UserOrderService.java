@@ -3,8 +3,10 @@ package com.dj.movie.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.dj.movie.pojo.Movie;
 import com.dj.movie.pojo.MovieOffice;
 import com.dj.movie.pojo.UserOrder;
+import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 
@@ -26,4 +28,6 @@ public interface UserOrderService extends IService<UserOrder> {
      */
     void addUserOrderAndUpdateMovieSeating(MovieOffice movieOffice, Integer buyNum, BigDecimal buyPrice,
                                            Integer userId);
+
+    void updateUserOrderAndUpdateMovieOffice(Integer id, MovieOffice movieOffice, UserOrder userOrder) throws Exception;
 }

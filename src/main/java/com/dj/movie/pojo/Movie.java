@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -35,6 +36,8 @@ public class Movie {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") //接收前台日期格式
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8") //返回前台格式
     private LocalDateTime topTime;
+
+    private String topTimeShow;
 
     /** 上下架*/
     private Integer status;

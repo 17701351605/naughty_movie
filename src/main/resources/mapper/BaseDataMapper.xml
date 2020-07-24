@@ -3,4 +3,7 @@
 <mapper namespace="com.dj.movie.mapper.BaseDataMapper">
 
 
+    <select id="findAllByPId" resultType="com.dj.movie.pojo.BaseData">
+        SELECT b.*,base_name FROM base_data b where b.parent_id = #{parentId}
+    </select>
 </mapper>

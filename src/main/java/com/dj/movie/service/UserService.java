@@ -7,4 +7,5 @@ public interface UserService extends IService<User> {
 
     User findNameAndPwd(User user) throws Exception;
 
+    User findUserByName(User user) throws Exception;
 }

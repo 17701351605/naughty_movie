@@ -18,4 +18,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return userMapper.findNameAndPwd(user);
     }
 
+    @Override
+    public User findUserByName(User user) throws Exception {
+        return userMapper.findUserByName(user);
+    }
+
 }

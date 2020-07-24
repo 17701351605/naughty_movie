@@ -8,10 +8,12 @@
 
     <select id="findNameAndPwd" resultType="com.dj.movie.pojo.User">
         select <include refid="user"/> from `user` where
-            username = #{username} or
-            phone_number = #{username} or
-            email = #{username} and
-            password = #{password}
+            username = #{username} or phone_number = #{username} or email = #{username} and password = #{password}
+</select>
+
+    <select id="findUserByName" resultType="com.dj.movie.pojo.User">
+        select <include refid="user"/> from `user` where
+            username = #{username} or phone_number = #{phoneNumber} or email = #{email}
     </select>
 
 

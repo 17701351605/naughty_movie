@@ -30,9 +30,12 @@
                 }
             },
             messages:{
-                username: "请输入用户名",
-                password: "请输入密码",
-                email:"请输入正确的电子邮箱"
+                username: {
+                    required:"请输入用户名"
+                },
+                password: {
+                    required:"请输入密码"
+                }
             }
         });
     });
@@ -40,13 +43,28 @@
         submitHandler:function () {
             $.post("<%=request.getContextPath()%>/user/login",$("#fm").serialize(),
                 function (data) {
-
+                    if (data.code != 200){
+                        layer.msg(data.msg);
+                        return;
+                    }
+                    window.location.href="<%=request.getContextPath()%>/movie/toMovieShow";
             });
         }
     });
-
+    //去注册用户
     function toRegister() {
-
+        layer.open({
+            type: 2,
+            title: '注册用户',
+            shadeClose: true,
+            shade: 0.4,
+            area: ['500px', '80%'],
+            content: '<%=request.getContextPath()%>/user/toRegister'
+        });
+    }
+    //去邮箱验证码页面
+    function toEmail() {
+        window.location.href="<%=request.getContextPath()%>/user/toEmail";
     }
 </script>
 <style>
@@ -56,10 +74,10 @@
 </style>
 <body style="text-align: center">
 <form id="fm">
-    用户名：<input type="text" name="username"/><br/>
-    邮箱：<input type="text" name="email"/><br/>
-    密码：<input type="text" name="password"/><br/>
-        <input type="submit" value="登录"/><br/>
+    用户名：<input type="text" name="username"/><br/><br/>
+    密码：<input type="text" name="password"/><br/><br/>
+        <input type="submit" value="登录"/><br/><br/>
+        <input type="button" value="去验证码登录" onclick="toEmail()"/><br/><br/>
         <input type="button" value="没有帐号？去添加" onclick="toRegister()"/><br/>
 
 </form>

@@ -197,5 +197,53 @@ public class MovieController {
         }
 
     }
+
+    /**
+     * 删除
+     * @param
+     * @return
+     * @autor hwk
+     */
+    @RequestMapping("delOffice")
+    public ResultModel delOffice(MovieOffice movieOffice) {
+        try {
+            movieOfficeService.updateById(movieOffice);
+            return new ResultModel().success("删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常,请稍后再试");
+        }
+    }
+
+    /**
+     * 场次的修改
+     * @return
+     */
+    @RequestMapping("updateOffice")
+    public ResultModel updateOffice(MovieOffice movieOffice) {
+        try {
+            movieOfficeService.updateById(movieOffice);
+            return new ResultModel().success("修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常,请稍后再试");
+        }
+    }
+
+    /**
+     * 场次的增加
+     * @param movieOffice
+     * @return
+     */
+    @RequestMapping("addMovieOffice")
+    public ResultModel addMovieOffice(MovieOffice movieOffice) {
+        try {
+            movieOfficeService.save(movieOffice);
+            return new ResultModel().success("增加成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常,请稍后再试");
+        }
+    }
 }
 

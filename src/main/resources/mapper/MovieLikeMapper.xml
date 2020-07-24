@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dj.movie.mapper.MovieLikeMapper">
+
+    <sql id="MOVIELIKE">
+        id,movie_id,user_id,score,is_like
+    </sql>
+
+    <insert id="addMovieLike">
+        insert into movie_like (movie_id, user_id, score, is_like) values (#{MovieId}, #{userId}, #{score}, null)
+    </insert>
+
+    <update id="updateMovieLikeScore">
+        update
+            movie_like
+        <set>
+            score =#{score}
+        </set>
+        <where>
+            user_id = #{userId} and movie_id =#{MovieId}
+        </where>
+    </update>
+
+    <select id="findMovieLikeByUserIdAndMovieId" resultType="com.dj.movie.pojo.MovieLike">
+        select <include refid="MOVIELIKE"/> from movie_like where user_id = #{userId} and movie_id =#{MovieId}
+    </select>
+
+    <update id="updateMovieLikeIsLike">
+        update movie_like
+        <set>
+            is_like = #{isLike}
+        </set>
+        <where>
+            user_id = #{userId} and movie_id =#{MovieId}
+        </where>
+    </update>
+
+</mapper>

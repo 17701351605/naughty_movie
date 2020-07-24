@@ -5,7 +5,4 @@ import com.dj.movie.pojo.MovieComment;
 
 public interface MovieCommentService extends IService<MovieComment> {
 
-    MovieComment findMovieCommentByUserId(Integer id) throws Exception;
-
-    void updateMovieCommentIsLike(Integer id) throws Exception;
 }

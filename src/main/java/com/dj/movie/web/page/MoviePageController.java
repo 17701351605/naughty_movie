@@ -1,6 +1,8 @@
 package com.dj.movie.web.page;
 
 import com.dj.movie.pojo.Movie;
+import com.dj.movie.pojo.MovieLike;
+import com.dj.movie.service.MovieLikeService;
 import com.dj.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,8 @@ public class MoviePageController {
     @Autowired
     private MovieService movieService;
 
+    @Autowired
+    private MovieLikeService movieLikeService;
 
     /**
      * 去电影详情页面
@@ -26,8 +30,18 @@ public class MoviePageController {
     @GetMapping("toMovieDetail")
     public String toMovieDetail(Integer movieId, Model model) throws Exception {
         Movie movie = movieService.findMovieByMovieId(1);
-        model.addAttribute("movie",movie);
-        return "Movie/movie_comment";
+        MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(1, 1);
+        if (movieLike != null) {
+            if (movieLike.getScore() != null) {
+                model.addAttribute("score", movieLike.getScore());
+            } else {
+                model.addAttribute("score", null);
+            }
+        } else {
+            model.addAttribute("score", null);
+        }
+        model.addAttribute("movie", movie);
+        return "movie/movie_comment";
     }
 
     /**
@@ -38,7 +52,7 @@ public class MoviePageController {
      */
     @GetMapping("toMovieOffice")
     public String toMovieOffice() throws Exception {
-        return "Movie/movie_office";
+        return "movie/movie_office";
     }
 
     /**

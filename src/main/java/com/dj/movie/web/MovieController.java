@@ -190,7 +190,7 @@ public class MovieController {
             UUID uuid = UUID.randomUUID();
             movie.setMovieId(uuid.toString().replace("-",""));
             movieService.save(movie);
-            return new ResultModel().success("修改成功");
+            return new ResultModel().success("新增成功");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel().error("服务器异常,请稍后再试");

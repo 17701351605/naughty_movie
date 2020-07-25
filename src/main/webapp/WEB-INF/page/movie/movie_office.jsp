@@ -42,7 +42,7 @@
                         if (${user.level ==0}){
                             html +="<input type='button' onclick='buyTicket(" +m.id+ ")' value='购票' />";
                             /** 剩余票数和总票数相等  显示团购按钮 */
-                            if (movie.seating == 50 ){
+                            if (m.seating == 50){
                                 html += "<input type='button' onclick='tuanGou(" +m.id+ ")' value='团购' />";
                             }
                         }

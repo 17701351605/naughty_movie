@@ -37,7 +37,7 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
     public void addUserOrderAndUpdateMovieSeating(MovieOffice movieOffice, Integer buyNum, BigDecimal buyPrice,
                                                   Integer userId) {
         UserOrder userOrder = new UserOrder();
-        userOrder.setMovieId(movieOffice.getMovieId());
+        userOrder.setMovieId(String.valueOf(movieOffice.getId()));
         userOrder.setMovieName(movieOffice.getMovieName());
         userOrder.setPlayHall(movieOffice.getPlayHall());
         userOrder.setPrices(buyPrice);

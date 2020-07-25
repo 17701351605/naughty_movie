@@ -159,23 +159,24 @@ public class MovieController {
      * @date: 2020年7月23日
      */
     @RequestMapping("toLike")
-    public ResultModel<Object> toLike(String movieId, @SessionAttribute("user") User user) {
+    public ResultModel<Object> toLike(Integer id, @SessionAttribute("user") User user) {
         try {
+            Movie movie = movieService.findMovieById(id);
             //根据登陆获取的用户id进行查询
-            MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), movieId);
+            MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), movie.getMovieId());
             //判断用户是否点赞
             if(movieLike!=null){
                 if (movieLike.getIsLike()!=null && movieLike.getIsLike() == 1) {
                     //取消点赞
-                    movieLikeService.updateMovieLikeIsLike(user.getId(),movieId,0);
+                    movieLikeService.updateMovieLikeIsLike(user.getId(),movie.getMovieId(),0);
                     return new ResultModel<Object>().success("取消成功,感谢您的支持");
                 } else {
                     //点赞
-                    movieLikeService.updateMovieLikeIsLike(user.getId(),movieId,1);
+                    movieLikeService.updateMovieLikeIsLike(user.getId(),movie.getMovieId(),1);
                     return new ResultModel<Object>().success("点赞成功");
                 }
             }
-            movieLikeService.addMovieLikeByUserIdAndMovieId(user.getId(),movieId,1);
+            movieLikeService.addMovieLikeByUserIdAndMovieId(user.getId(),movie.getMovieId(),1);
             return new ResultModel<Object>().success("点赞成功");
         } catch (Exception e) {
             e.printStackTrace();

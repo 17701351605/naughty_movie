@@ -37,10 +37,10 @@ public class MoviePageController {
      * @author: zby
      * @date: 2020年7月23日
      */
-    @GetMapping("toMovieDetail")
-    public String toMovieDetail(String movieId, Model model, @SessionAttribute("user") User user) throws Exception {
-        Movie movie = movieService.findMovieByMovieId(movieId);
-        MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), movieId);
+    @GetMapping("toMovieDetail/{id}")
+    public String toMovieDetail(@PathVariable Integer id, Model model, @SessionAttribute("user") User user) throws Exception {
+        Movie movie = movieService.findMovieById(id);
+        MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), movie.getMovieId());
         if (movieLike != null) {
             if (movieLike.getScore() != null) {
                 model.addAttribute("score", movieLike.getScore());

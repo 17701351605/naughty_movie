@@ -49,7 +49,8 @@
                         }else{
                             html += "<input type = 'button' value = '上架' onclick = 'statuss(1,"+movie.id +")'/>";
                         }
-                        html += "<input type = 'button' value = '电影详情' onclick = 'toMovieComment("+movie.id +")'/>";
+                        /*html += "<input type = 'button' value = '电影详情' onclick = 'toComment("+"'"+movie.movieId+"'"+")'/>";*/
+                        html += "<input type = 'button' value = '电影详情' onclick = 'toComment("+movie.id +")'/>";
                         html += "</td>";
                         html += "</tr>";
                     }
@@ -59,6 +60,13 @@
                     $("#pageDiv").html(pageHtml);
                 });
             }
+
+        //跳电影详情展示
+        function toComment(id) {
+            alert(id);
+            location.href = "<%=request.getContextPath()%>/movie/toMovieDetail/" + id;
+        }
+
         //删除
         function del(id){
             var index = layer.load(1, {shade: 0.2});
@@ -155,10 +163,6 @@
             search();
         }
 
-        //跳电影详情展示
-        function toMovieComment(movieId) {
-            location.href = "<%=request.getContextPath()%>/movie/toMovieDetail?movieId=" + movieId;
-        }
     </script>
 </head>
 <input type="button" value="我的影票" onclick="myMovie()"/>

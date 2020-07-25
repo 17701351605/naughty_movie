@@ -45,9 +45,9 @@
         }
 
         /** 点赞 */
-        function toLike(movieId){
+        function toLike(id){
             var index = layer.load(1, {shade: 0.2});
-            $.post("<%=request.getContextPath()%>/movie/toLike?movieId=" + movieId,
+            $.post("<%=request.getContextPath()%>/movie/toLike?id=" + id,
                 {},
                 function(data){
                     layer.msg(data.msg, {icon: 6, time: 2000},
@@ -155,7 +155,7 @@
 电影片长：${movie.longTime} <br/>
 上线时间：${movie.topTime}<br/>
 <c:if test="${user.level == 0}">
-    <input type='button' value='点赞' onclick='toLike("${movie.movieId}")'/>
+    <input type='button' value='点赞' onclick='toLike("${movie.id}")'/>
     <button id="hide">隐藏</button>
     <button id="show">评论</button>
 </c:if>

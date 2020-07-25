@@ -9,14 +9,11 @@ import com.dj.movie.service.BaseDataService;
 import com.dj.movie.service.MovieOfficeService;
 import com.dj.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -36,8 +33,9 @@ public class MoviePageController {
 
     /**
      * 去电影详情页面
-     * @author: zby
+     *
      * @throws Exception
+     * @author: zby
      * @date: 2020年7月23日
      */
     @GetMapping("toMovieDetail")
@@ -59,8 +57,9 @@ public class MoviePageController {
 
     /**
      * 去电影场次页面
-     * @author: zby
+     *
      * @throws Exception
+     * @author: zby
      * @date: 2020年7月23日
      */
     @GetMapping("toMovieOffice")
@@ -70,10 +69,13 @@ public class MoviePageController {
 
     /**
      * 跳转初次登陆展示页面
+     *
      * @author: CYS
      */
     @RequestMapping("toMovieShow")
-    private String toMovieShow(){
+    private String toMovieShow(Model model) throws Exception {
+        List<BaseData> list = baseDataService.findAllByPId(1);
+        model.addAttribute("list", list);
         return "movie/show";
     }
     /**

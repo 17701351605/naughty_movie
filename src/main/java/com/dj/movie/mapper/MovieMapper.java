@@ -2,13 +2,11 @@ package com.dj.movie.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.dj.movie.config.UserQuery;
+import com.dj.movie.pojo.query.MovieQuery;
 import com.dj.movie.pojo.Movie;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
 
-import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
@@ -30,7 +28,7 @@ public interface MovieMapper extends BaseMapper<Movie> {
      * @return
      */
 
-    IPage<Movie> findMovieAll(IPage<Movie> page, @Param("query") UserQuery query);
+    IPage<Movie> findMovieAll(IPage<Movie> page, @Param("query") MovieQuery query, @Param("movieName") String movieName, @Param("status") Integer status, @Param("movieType") Integer[] movieType);
 
     Movie findMovieById(Integer id) throws DataAccessException;
 }

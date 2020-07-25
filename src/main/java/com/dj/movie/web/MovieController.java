@@ -1,6 +1,6 @@
 package com.dj.movie.web;
 
-import com.dj.movie.config.UserQuery;
+import com.dj.movie.pojo.query.MovieQuery;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dj.movie.pojo.*;
 import com.dj.movie.service.MovieCommentService;
@@ -9,10 +9,8 @@ import com.dj.movie.service.MovieOfficeService;
 import com.dj.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,7 +42,8 @@ public class MovieController {
 
 
     @RequestMapping("show")
-    public ResultModel show(Movie movie, UserQuery query/*, @SessionAttribute("user")User user*/){
+    public ResultModel show(MovieQuery query, String movieName, Integer status ,Integer[] movieType){
+        /*  public ResultModel show(Movie movie, UserQuery query*//*, @SessionAttribute("user")User user*//*){*/
         try{
           /*  //如果登录的是普通用户查状态为上架的
             if (user.getLevel() == 0) {
@@ -53,7 +52,7 @@ public class MovieController {
                 query.setStatus(0);
             }*/
             Map<String,Object> map = new HashMap<>();
-            List<Movie> movieList = movieService.findMovieAll(query);
+            List<Movie> movieList = movieService.findMovieAll(query, movieName, status, movieType);
             map.put("pages",query.getPages());
             map.put("movieList", movieList);
             return new ResultModel().success(map);

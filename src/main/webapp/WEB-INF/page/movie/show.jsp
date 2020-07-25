@@ -40,14 +40,14 @@
                         html += "<td>" + movie.topTime + "</td>";
                         html +=	"<td>";
                         html += "<input type = 'button' value = '电影详情' onclick = 'toComment("+movie.id +")'/>";
-                      /*  if (${user.level == 1}) {*/
+                        if (${user.level == 1}) {
                             html += "<input type = 'button' value = '修改' onclick = 'update("+movie.id +")'/>";
                             html += "<input type = 'button' value = '删除' onclick = 'del("+movie.id +")'/>";
-                        /*}*/
-                        if (movie.status==1) {
-                            html += "<input type = 'button' value = '下架' onclick = 'statuss(0,"+movie.id +")'/>";
-                        }else{
-                            html += "<input type = 'button' value = '上架' onclick = 'statuss(1,"+movie.id +")'/>";
+                            if (movie.status==1) {
+                                html += "<input type = 'button' value = '下架' onclick = 'statuss(0,"+movie.id +")'/>";
+                            }else{
+                                html += "<input type = 'button' value = '上架' onclick = 'statuss(1,"+movie.id +")'/>";
+                            }
                         }
                         /*html += "<input type = 'button' value = '电影详情' onclick = 'toComment("+"'"+movie.movieId+"'"+")'/>";*/
                         html += "</td>";
@@ -167,9 +167,9 @@
 <input type="button" value="我的影票" onclick="myMovie()"/>
 <body style="text-align:center">
 <form id="fm">
-   <%-- <c:if test="${user.level == 1}">--%>
+    <c:if test="${user.level == 1}">
         <input type="button" value='增加电影' onclick='addMovie()'/><br/>
-   <%-- </c:if>--%>
+    </c:if>
     <input type="hidden" name="pageNo" value="1" id="pageNo"/>
     <input type="hidden" name="status" value="1" />
     电影名称：<input type="text" name="movieName"/><br/>

@@ -34,10 +34,10 @@
                         html += "<td>" + m.startTime + "</td>";
                         html += "<td>";
                         //管理员 登录
-                        /*if (${user.level == 1}) {*/
+                       if(${user.level == 1}) {
                             html += "<input type = 'button' value = '修改' onclick = 'update("+m.id+")'/>";
                             html += "<input type = 'button' value = '删除' onclick = 'del("+m.id+")'/>";
-                      /*  }*/
+                        }
                         /**登录人为用户显示购买和团购*/
                         if (${user.level ==0}){
                             html +="<input type='button' onclick='buyTicket(" +m.id+ ")' value='购票' />";
@@ -65,7 +65,7 @@
         //删除
         function del(id){
             var index = layer.load(1, {shade: 0.2});
-            $.post("<%=request.getContextPath()%>/movie/delOffice/",
+            $.post("<%=request.getContextPath()%>/movie/delOffice",
                 {"id":id,"isDel":0},
                 function(data){
                     if (data.code != 200) {
@@ -75,7 +75,7 @@
                     }
                     layer.msg(data.msg, {icon: 6, time: 2000},
                         function(){
-                            window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice";
+                            window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?id="+${movieId};
                             layer.close(index);
                         });
                 });
@@ -102,7 +102,7 @@
                 shadeClose: true,
                 shade: 0.4,
                 area: ['500px', '80%'],
-                content: '<%=request.getContextPath()%>/movie/toMovieOfficeAdd'
+                content: '<%=request.getContextPath()%>/movie/toMovieOfficeAdd?id='+${movieId}
             });
             layer.close(index);
         }

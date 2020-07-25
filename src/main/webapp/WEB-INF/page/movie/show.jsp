@@ -36,21 +36,20 @@
                         html += "<td>" + movie.movieName + "</td>";
                         html += "<td>" + movie.actorName + "</td>";
                         html += "<td>" + movie.baseName + "</td>";
-                        html += "<td>" + movie.longTime +"分钟"+ "</td>";
+                        html += "<td>" + movie.longTime +"分钟"+"</td>";
                         html += "<td>" + movie.topTime + "</td>";
-
                         html +=	"<td>";
-                        if (${user.level == 1}) {
+                        html += "<input type = 'button' value = '电影详情' onclick = 'toComment("+movie.id +")'/>";
+                      /*  if (${user.level == 1}) {*/
                             html += "<input type = 'button' value = '修改' onclick = 'update("+movie.id +")'/>";
                             html += "<input type = 'button' value = '删除' onclick = 'del("+movie.id +")'/>";
+                        /*}*/
+                        if (movie.status==1) {
+                            html += "<input type = 'button' value = '下架' onclick = 'statuss(0,"+movie.id +")'/>";
+                        }else{
+                            html += "<input type = 'button' value = '上架' onclick = 'statuss(1,"+movie.id +")'/>";
                         }
-                        if (${user.level == 1}) {
-                            if (movie.status == 1) {
-                                html += "<input type = 'button' value = '下架' onclick = 'statuss(0," + movie.id + ")'/>";
-                            } else {
-                                html += "<input type = 'button' value = '上架' onclick = 'statuss(1," + movie.id + ")'/>";
-                            }
-                        }
+                        /*html += "<input type = 'button' value = '电影详情' onclick = 'toComment("+"'"+movie.movieId+"'"+")'/>";*/
                         html += "</td>";
                         html += "</tr>";
                     }
@@ -60,6 +59,13 @@
                     $("#pageDiv").html(pageHtml);
                 });
             }
+
+        //跳电影详情展示
+        function toComment(id) {
+            alert(id);
+            location.href = "<%=request.getContextPath()%>/movie/toMovieDetail/" + id;
+        }
+
         //删除
         function del(id){
             var index = layer.load(1, {shade: 0.2});
@@ -121,7 +127,7 @@
                 title: '添加',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['480px', '90%'],
+                area: ['500px', '90%'],
                 content:"<%=request.getContextPath()%>/movie/toAdd",
             });
         }
@@ -130,38 +136,40 @@
             location.href = "<%=request.getContextPath()%>/userOrder/toShow"
         }
 
+
         function selectMovie() {
             $("#pageNo").val(1);
             search();
         }
 
+        //分页
         function page(temp, pages) {
             var page = $("#pageNo").val();
             if (temp == 0) {
                 if (parseInt(page) - 1 < 1) {
-                    layer.alert("已是首页",{icon : 6,time:2000});
+                    layer.msg("已是首页",{icon : 7,time:2000});
                     return;
                 }
                 $("#pageNo").val(parseInt(page) - 1);
             }
             if (temp == 1) {
                 if (parseInt(page) + 1 > pages) {
-                    layer.alert("已经尾页了", {icon : 5,time:2000});
+                    layer.msg("已经尾页了", {icon : 5,time:2000});
                     return;
                 }
                 $("#pageNo").val(parseInt(page) + 1);
             }
             search();
         }
-    </script>
 
+    </script>
 </head>
 <input type="button" value="我的影票" onclick="myMovie()"/>
 <body style="text-align:center">
 <form id="fm">
-    <c:if test="${user.level == 1}">
+   <%-- <c:if test="${user.level == 1}">--%>
         <input type="button" value='增加电影' onclick='addMovie()'/><br/>
-    </c:if>
+   <%-- </c:if>--%>
     <input type="hidden" name="pageNo" value="1" id="pageNo"/>
     <input type="hidden" name="status" value="1" />
     电影名称：<input type="text" name="movieName"/><br/>
@@ -169,13 +177,6 @@
     <c:forEach items="${list}" var="a">
         ${a.baseName} <input type="checkbox" name="movieType" value="${a.id}" />
     </c:forEach>
-    <%--战争<input type="checkbox" name="baseName" value="2"/>
-    武侠<input type="checkbox" name="baseName" value="3"/>
-    动漫<input type="checkbox" name="baseName" value="4"/>
-    科幻<input type="checkbox" name="baseName" value="5"/>
-    悬疑<input type="checkbox" name="baseName" value="6"/>
-    恐怖<input type="checkbox" name="baseName" value="7"/>
-    爱情<input type="checkbox" name="baseName" value="8"/>--%>
     <input type="button" value="查询" onclick="selectMovie()">
 </form>
 <table align="center">

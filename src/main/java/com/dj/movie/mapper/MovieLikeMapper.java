@@ -19,4 +19,5 @@ public interface MovieLikeMapper extends BaseMapper<MovieLike> {
     void updateMovieLikeIsLike(@Param("userId") Integer userId, @Param("MovieId") String MovieId, @Param("isLike") Integer isLike) throws DataFormatException;
 
     void addMovieLikeByUserIdAndMovieId (@Param("userId") Integer userId, @Param("MovieId") String MovieId, @Param("isLike") Integer isLike) throws DataFormatException;
+
 }

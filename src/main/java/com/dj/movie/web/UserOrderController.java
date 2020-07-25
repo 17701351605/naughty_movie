@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dj.movie.pojo.MovieOffice;
 import com.dj.movie.pojo.ResultModel;
+import com.dj.movie.pojo.User;
 import com.dj.movie.pojo.UserOrder;
 import com.dj.movie.service.MovieOfficeService;
 import com.dj.movie.service.UserOrderService;
@@ -12,6 +13,7 @@ import com.sun.prism.shader.Solid_TextureYV12_AlphaTest_Loader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -34,13 +36,14 @@ public class UserOrderController {
      * @param movieOffice
      * @param buyNum 购买数量
      * @param buyPrice 购买总价
-     * @param userId 购买人id
+     * @param user 购买人（登录人）
      * @author fzz
      */
     @RequestMapping("addOrder")
-    public ResultModel addOrder(MovieOffice movieOffice, Integer buyNum, BigDecimal buyPrice, Integer userId){
+    public ResultModel addOrder(MovieOffice movieOffice, Integer buyNum, BigDecimal buyPrice,
+                                @SessionAttribute("user")User user){
         try{
-            userOrderService.addUserOrderAndUpdateMovieSeating(movieOffice,buyNum,buyPrice,userId);
+            userOrderService.addUserOrderAndUpdateMovieSeating(movieOffice,buyNum,buyPrice,user.getId());
             return new ResultModel().success("购票成功");
         }catch (Exception e){
             e.printStackTrace();
@@ -52,16 +55,16 @@ public class UserOrderController {
      * 1.根据播放厅主键ID查出该电影此播放厅信息
      * 2.进行添加用户购买记录和减该播放厅剩余票数
      * @param id 播放厅主键ID
-     * @param userId 用户ID
+     * @param user 登录用户
      * @author fzz
      */
     @RequestMapping("tuanGou")
-    public ResultModel tuanGou(Integer id, Integer userId){
+    public ResultModel tuanGou(Integer id, @SessionAttribute("user")User user){
         try{
             MovieOffice movieOffice = movieOfficeService.getById(id);
             Integer buyNum = movieOffice.getSeating();
             BigDecimal buyPrice = movieOffice.getPrice().multiply(BigDecimal.valueOf(buyNum)).multiply(BigDecimal.valueOf(0.8));
-            addOrder(movieOffice,buyNum,buyPrice,userId);
+            addOrder(movieOffice,buyNum,buyPrice,user);
             return new ResultModel().success("购票成功");
         }catch (Exception e){
             e.printStackTrace();

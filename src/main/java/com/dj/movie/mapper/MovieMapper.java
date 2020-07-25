@@ -18,7 +18,7 @@ public interface MovieMapper extends BaseMapper<Movie> {
 
     List<Movie> findMovieAll(Movie movie) throws DataAccessException;
 
-    Movie findMovieByMovieId(Integer id) throws DataFormatException;
+    Movie findMovieByMovieId(String id) throws DataFormatException;
 
     /**
      * 自定义SQL分页

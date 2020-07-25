@@ -34,7 +34,7 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
     }
 
     @Override
-    public Movie findMovieByMovieId(Integer id) throws Exception {
+    public Movie findMovieByMovieId(String id) throws Exception {
         return movieMapper.findMovieByMovieId(id);
     }
 

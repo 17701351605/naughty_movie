@@ -114,7 +114,7 @@ public class MovieController {
      * @return
      */
     @RequestMapping("movieOfficeShow")
-    public ResultModel<Object> movieOfficeShow(Integer movieId, String startingTime, String endTime) {
+    public ResultModel<Object> movieOfficeShow(String movieId, String startingTime, String endTime) {
         Map<String, Object> map = new HashMap<String, Object>();
         try {
             // 时间日期格式转化器
@@ -159,7 +159,7 @@ public class MovieController {
      * @date: 2020年7月23日
      */
     @RequestMapping("toLike")
-    public ResultModel<Object> toLike(Integer movieId, @SessionAttribute("user") User user) {
+    public ResultModel<Object> toLike(String movieId, @SessionAttribute("user") User user) {
         try {
             //根据登陆获取的用户id进行查询
             MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), movieId);
@@ -192,7 +192,7 @@ public class MovieController {
      * @date: 2020年7月24日
      */
     @RequestMapping("updateMovieLikeScore")
-    public ResultModel<Object> updateMovieLikeScore(Integer score, Integer movieId, @SessionAttribute("user") User user) {
+    public ResultModel<Object> updateMovieLikeScore(Integer score, String movieId, @SessionAttribute("user") User user) {
         try {
             //根据登陆获取的用户id进行查询
             MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), movieId);
@@ -303,7 +303,7 @@ public class MovieController {
      * @return
      */
     @RequestMapping("discuss")
-    public ResultModel<Object> discuss(Integer movieId, String remark, @SessionAttribute("user") User user) {
+    public ResultModel<Object> discuss(String movieId, String remark, @SessionAttribute("user") User user) {
         try {
             if (StringUtils.isEmpty(remark)) {
                 return new ResultModel<Object>().error("请添加信息");

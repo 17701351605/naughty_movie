@@ -154,12 +154,16 @@
 电影名称:${movie.movieName} <br/>
 电影片长：${movie.longTime} <br/>
 上线时间：${movie.topTime}<br/>
-<input type='button' value='点赞' onclick='toLike("${movie.movieId}")'/>
-
-<button id="hide">隐藏</button>
-<button id="show">评论</button>
+<c:if test="${user.level == 0}">
+    <input type='button' value='点赞' onclick='toLike("${movie.movieId}")'/>
+    <button id="hide">隐藏</button>
+    <button id="show">评论</button>
+</c:if>
 <input type = 'button' value = '查看场次' onclick = 'toMovieOffice("+movie.id+")'/><br/>
-电影评分:<div id="test2"></div>
+<c:if test="${user.level == 0}">
+    电影评分:<div id="test2"></div>
+</c:if>
+
 <%--<article class="htmleaf-container">
     <header class="htmleaf-header">
     </header>

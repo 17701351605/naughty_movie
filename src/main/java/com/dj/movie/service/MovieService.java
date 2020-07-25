@@ -15,7 +15,7 @@ public interface MovieService extends IService<Movie> {
 
     List<Movie> findMovieAll(MovieQuery query, String movieName, Integer status, Integer[] movieType);
 
-    Movie findMovieByMovieId(Integer id) throws Exception;
+    Movie findMovieByMovieId(String id) throws Exception;
 
     Movie findMovieById(Integer id) throws Exception;
 

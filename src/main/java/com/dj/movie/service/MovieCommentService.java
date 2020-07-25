@@ -8,5 +8,5 @@ import java.util.zip.DataFormatException;
 
 public interface MovieCommentService extends IService<MovieComment> {
 
-    void addMovieComment(Integer userId, Integer MovieId, String remark) throws Exception;
+    void addMovieComment(Integer userId, String MovieId, String remark) throws Exception;
 }

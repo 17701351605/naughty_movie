@@ -28,11 +28,6 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
         IPage<Movie> page1 = new Page<>(query.getPageNo(), query.getPageSize());
         // 分页后的信息
         IPage<Movie> pageInfo = getBaseMapper().findMovieAll(page1, query, movieName, status, movieType);
-        // 总页数
-        System.out.println(pageInfo.getPages());
-        // 总条数
-        System.out.println(pageInfo.getTotal());
-        // 分页总页数
         query.setPages((int) pageInfo.getPages());
         List<Movie> movieList = pageInfo.getRecords();
         return movieList;

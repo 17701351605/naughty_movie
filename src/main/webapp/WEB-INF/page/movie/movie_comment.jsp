@@ -29,7 +29,7 @@
 
         function search() {
             $.post("<%=request.getContextPath()%>/movie/evaluatShow",
-                {"movieId":${movie.movieId}},
+                {"movieId":${movie.id}},
                 function (data) {
                     var html = "";
                     for (var i = 0; i < data.data.length; i++) {
@@ -86,9 +86,9 @@
                     if (value < 4) layer.msg('感谢您的支持')
                     if (value >= 4) layer.msg('么么哒，感谢您的支持')
                     $.post("<%=request.getContextPath()%>/movie/updateMovieLikeScore",
-                        {"score": value, "movieId":${movie.movieId}},
+                        {"score": value, "movieId":${movie.id}},
                         function (data) {
-                            location.href = "<%=request.getContextPath()%>/movie/toMovieDetail?movieId=" + ${movie.movieId};
+                            location.href = "<%=request.getContextPath()%>/movie/toMovieDetail/" + ${movie.id};
                             return;
                         })
                 }
@@ -123,7 +123,7 @@
         function discuss() {
             var index = layer.load(1, {shade: 0.2});
             $.post("<%=request.getContextPath()%>/movie/discuss",
-                {"movieId":${movie.movieId}, "remark": $("#remark").val()},
+                {"movieId":${movie.id}, "remark": $("#remark").val()},
                 function (data) {
                     if (data.code != 200) {
                         layer.msg(data.msg);
@@ -133,14 +133,14 @@
                     layer.msg(data.msg, {icon: 6, time: 2000},
                         function(){
                             layer.close(index);
-                            location.href = "<%=request.getContextPath()%>/movie/toMovieDetail?movieId=" + ${movie.movieId};
+                            location.href = "<%=request.getContextPath()%>/movie/toMovieDetail/" + ${movie.id};
                         });
                 })
         }
 
         /** 去场次 */
         function toMovieOffice(id){
-            window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?movieId=" + ${movie.movieId};
+            window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?movieId=" + ${movie.id};
         }
     </script>
     <style>
@@ -171,11 +171,11 @@
     </div>
 
 </article>--%>
-<div class="feed" id="feed2">
+<%--<div class="feed" id="feed2">
     <div class="heart" id="like3" rel="like">
         <div class="likeCount" id="likeCount3">24</div>
     </div>
-</div>
+</div>--%>
 <table align="center">
     <tr>
         <td>相关评论:</td>

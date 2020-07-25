@@ -10,6 +10,10 @@
         insert into movie_like (movie_id, user_id, score, is_like) values (#{MovieId}, #{userId}, #{score}, null)
     </insert>
 
+    <insert id="addMovieLikeByUserIdAndMovieId">
+        insert into movie_like (movie_id, user_id, score, is_like) values (#{MovieId}, #{userId}, null, #{isLike})
+    </insert>
+
     <update id="updateMovieLikeScore">
         update
             movie_like

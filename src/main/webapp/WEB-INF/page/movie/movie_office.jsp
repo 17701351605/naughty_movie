@@ -27,8 +27,6 @@
                     for (var i = 0; i < data.data.length; i++) {
                         var m = data.data[i];
                         html += "<tr>";
-                        html += "<td>" + m.id + "</td>";
-                        html += "<td>" + m.playHall + "</td>";
                         html += "<td>" + m.movieName + "</td>";
                         html += "<td>" + m.playHall + "</td>";
                         html += "<td>" + m.price + "</td>";
@@ -40,11 +38,28 @@
                             html += "<input type = 'button' value = '修改' onclick = 'update("+m.id+")'/>";
                             html += "<input type = 'button' value = '删除' onclick = 'del("+m.id+")'/>";
                       /*  }*/
+                        /**登录人为用户显示购买和团购*/
+                        if (${user.level ==0}){
+                            html +="<input type='button' onclick='buyTicket(" +m.id+ ")' value='购票' />";
+                            /** 剩余票数和总票数相等  显示团购按钮 */
+                            if (movie.seating == 50 ){
+                                html += "<input type='button' onclick='tuanGou(" +m.id+ ")' value='团购' />";
+                            }
+                        }
                         html += "</td>";
                         html += "</tr>";
                     }
                     $("#tb").html(html);
                 });
+        }
+
+        /** id 播放厅的主键id */
+        function tuanGou(id) {
+            window.location.href="<%=request.getContextPath()%>/userOrder/tuanGou/"+id;
+        }
+        /** id 播放厅的主键id */
+        function buyTicket(id){
+            window.location.href="<%=request.getContextPath()%>/userOrder/toByTicket/"+id;
         }
 
         //删除
@@ -95,7 +110,7 @@
 </head>
 <body style="text-align: center">
 <form id="fm">
-    <input type="hidden" name="movieId" value="${m.id}"/>
+    <input type="hidden" name="movieId" value="${movieId}"/>
     <c:if test="${user.level == 1}">
         <input type="button" value="增加" onclick="add()"/><br/><br/>
     </c:if>
@@ -104,12 +119,11 @@
 </form>
 <table border="1px" cellpadding=20px" cellspacing="0px" align="center">
     <tr>
-        <td>id</td>
-        <td>电影ID</td>
+        <td>电影名称</td>
         <td>影院播放厅</td>
-        <td>电影开始时间</td>
         <td>电影票单价</td>
         <td>电影剩余座位</td>
+        <td>电影开始时间</td>
         <td>操作</td>
     </tr>
     <tbody id="tb"></tbody>

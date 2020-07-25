@@ -14,25 +14,29 @@ public class MovieLikeServiceImpl extends ServiceImpl<MovieLikeMapper, MovieLike
     private MovieLikeMapper movieLikeMapper;
 
     @Override
-    public MovieLike findMovieLikeByUserIdAndMovieId(Integer userId, Integer MovieId) throws Exception {
+    public MovieLike findMovieLikeByUserIdAndMovieId(Integer userId, String MovieId) throws Exception {
         return movieLikeMapper.findMovieLikeByUserIdAndMovieId(userId, MovieId);
     }
 
     @Override
-    public void updateMovieLikeScore(Integer userId, Integer MovieId, Integer score) throws Exception {
+    public void updateMovieLikeScore(Integer userId, String MovieId, Integer score) throws Exception {
         movieLikeMapper.updateMovieLikeScore(userId, MovieId, score);
     }
 
     @Override
-    public void addMovieLike(Integer userId, Integer MovieId, Integer score) throws Exception {
+    public void addMovieLike(Integer userId, String MovieId, Integer score) throws Exception {
         movieLikeMapper.addMovieLike(userId, MovieId, score);
     }
 
     @Override
-    public void updateMovieLikeIsLike(Integer userId, Integer MovieId, Integer isLike) throws Exception {
+    public void updateMovieLikeIsLike(Integer userId, String MovieId, Integer isLike) throws Exception {
         movieLikeMapper.updateMovieLikeIsLike(userId, MovieId, isLike);
     }
 
+    @Override
+    public void addMovieLikeByUserIdAndMovieId(Integer userId, String MovieId, Integer isLike) throws Exception {
+        movieLikeMapper.addMovieLikeByUserIdAndMovieId(userId, MovieId, isLike);
+    }
 
 
 }

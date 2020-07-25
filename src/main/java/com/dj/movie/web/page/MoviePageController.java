@@ -37,10 +37,10 @@ public class MoviePageController {
      * @author: zby
      * @date: 2020年7月23日
      */
-    @GetMapping("toMovieDetail")
-    public String toMovieDetail(Integer movieId, Model model) throws Exception {
-        Movie movie = movieService.findMovieByMovieId(1);
-        MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(1, 1);
+    @GetMapping("toMovieDetail/{id}")
+    public String toMovieDetail(@PathVariable Integer id, Model model, @SessionAttribute("user") User user) throws Exception {
+        Movie movie = movieService.findMovieById(id);
+        MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), movie.getMovieId());
         if (movieLike != null) {
             if (movieLike.getScore() != null) {
                 model.addAttribute("score", movieLike.getScore());
@@ -51,6 +51,7 @@ public class MoviePageController {
             model.addAttribute("score", null);
         }
         model.addAttribute("movie", movie);
+        model.addAttribute("user", user);
         return "movie/movie_comment";
     }
 
@@ -62,7 +63,8 @@ public class MoviePageController {
      * @date: 2020年7月23日
      */
     @GetMapping("toMovieOffice")
-    public String toMovieOffice() throws Exception {
+    public String toMovieOffice(String movieId, Model model) throws Exception {
+        model.addAttribute("movieId", movieId);
         return "movie/movie_office";
     }
 
@@ -78,6 +80,7 @@ public class MoviePageController {
         model.addAttribute("list", list);
         return "movie/show";
     }
+
     /**
      *去增加
      * @author: hwk

@@ -10,11 +10,13 @@ import java.util.zip.DataFormatException;
 
 public interface MovieLikeMapper extends BaseMapper<MovieLike> {
 
-    MovieLike findMovieLikeByUserIdAndMovieId(@Param("userId") Integer userId, @Param("MovieId") Integer MovieId) throws DataFormatException;
+    MovieLike findMovieLikeByUserIdAndMovieId(@Param("userId") Integer userId, @Param("MovieId") String MovieId) throws DataFormatException;
 
-    void updateMovieLikeScore(@Param("userId") Integer userId, @Param("MovieId") Integer MovieId, @Param("score") Integer score) throws DataFormatException;
+    void updateMovieLikeScore(@Param("userId") Integer userId, @Param("MovieId") String MovieId, @Param("score") Integer score) throws DataFormatException;
 
-    void addMovieLike (@Param("userId") Integer userId, @Param("MovieId") Integer MovieId, @Param("score") Integer score) throws DataFormatException;
+    void addMovieLike (@Param("userId") Integer userId, @Param("MovieId") String MovieId, @Param("score") Integer score) throws DataFormatException;
 
-    void updateMovieLikeIsLike(@Param("userId") Integer userId, @Param("MovieId") Integer MovieId, @Param("isLike") Integer isLike) throws DataFormatException;
+    void updateMovieLikeIsLike(@Param("userId") Integer userId, @Param("MovieId") String MovieId, @Param("isLike") Integer isLike) throws DataFormatException;
+
+    void addMovieLikeByUserIdAndMovieId (@Param("userId") Integer userId, @Param("MovieId") String MovieId, @Param("isLike") Integer isLike) throws DataFormatException;
 }

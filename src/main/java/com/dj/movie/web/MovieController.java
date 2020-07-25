@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -64,9 +65,8 @@ public class MovieController {
     }
 
     /**
-     * 1.根据电影id查询进入电影详情页面
      * 电影详情页面展示
-     *
+     * 1.根据电影id查询进入电影详情页面
      * @return
      * @author: zby
      * @date: 2020年7月23日
@@ -114,7 +114,7 @@ public class MovieController {
      * @return
      */
     @RequestMapping("movieOfficeShow")
-    public ResultModel<Object> movieOfficeShow(Integer mId, String startingTime, String endTime) {
+    public ResultModel<Object> movieOfficeShow(String movieId, String startingTime, String endTime) {
         Map<String, Object> map = new HashMap<String, Object>();
         try {
             // 时间日期格式转化器
@@ -124,7 +124,7 @@ public class MovieController {
             //电影开始时间正序
             queryWrapper.orderByAsc("start_time");
             //电影id
-            queryWrapper.eq("movie_id", 1);
+            queryWrapper.eq("movie_id", movieId);
             //查询未删除的
             queryWrapper.eq("is_del", 1);
             //展示当前时间后的电影场次
@@ -141,7 +141,6 @@ public class MovieController {
                 queryWrapper.le("start_time", endTime1);
             }
             List<MovieOffice> movieOffice = movieOfficeService.list(queryWrapper);
-            // List<MovieOffice> movieOffice = movieOfficeService.findMovieOfficeByMovieId(1);
             return new ResultModel<Object>().success(movieOffice);
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,16 +159,24 @@ public class MovieController {
      * @date: 2020年7月23日
      */
     @RequestMapping("toLike")
-    public ResultModel<Object> toLike(Integer movieId/*, @SessionAttribute("user") User user*/) {
+    public ResultModel<Object> toLike(Integer id, @SessionAttribute("user") User user) {
         try {
+            Movie movie = movieService.findMovieById(id);
             //根据登陆获取的用户id进行查询
-            MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(1, 1);
+            MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), movie.getMovieId());
             //判断用户是否点赞
-            if (movieLike.getIsLike() == 1) {
-                movieLikeService.updateMovieLikeIsLike(1,1,0);
-                return new ResultModel<Object>().success("取消成功,感谢您的支持");
+            if(movieLike!=null){
+                if (movieLike.getIsLike()!=null && movieLike.getIsLike() == 1) {
+                    //取消点赞
+                    movieLikeService.updateMovieLikeIsLike(user.getId(),movie.getMovieId(),0);
+                    return new ResultModel<Object>().success("取消成功,感谢您的支持");
+                } else {
+                    //点赞
+                    movieLikeService.updateMovieLikeIsLike(user.getId(),movie.getMovieId(),1);
+                    return new ResultModel<Object>().success("点赞成功");
+                }
             }
-            movieLikeService.updateMovieLikeIsLike(1,1,1);
+            movieLikeService.addMovieLikeByUserIdAndMovieId(user.getId(),movie.getMovieId(),1);
             return new ResultModel<Object>().success("点赞成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -186,17 +193,17 @@ public class MovieController {
      * @date: 2020年7月24日
      */
     @RequestMapping("updateMovieLikeScore")
-    public ResultModel<Object> updateMovieLikeScore(Integer score, Integer movieId/*, @SessionAttribute("user") User user*/) {
+    public ResultModel<Object> updateMovieLikeScore(Integer score, String movieId, @SessionAttribute("user") User user) {
         try {
             //根据登陆获取的用户id进行查询
-            MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(1, 1);
+            MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), movieId);
             //若查询为空则进行新增
             if (movieLike == null){
-                movieLikeService.addMovieLike(1, 1, score);
+                movieLikeService.addMovieLike(user.getId(), movieId, score);
             }
             //若查询不为空并且未进行评分则进行修改添加评分
             if (movieLike != null && movieLike.getScore()==null) {
-                movieLikeService.updateMovieLikeScore(1, 1, score);
+                movieLikeService.updateMovieLikeScore(user.getId(), movieId, score);
             }
             return new ResultModel<Object>().success();
         } catch (Exception e) {
@@ -287,6 +294,26 @@ public class MovieController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel().error("服务器异常,请稍后再试");
+        }
+    }
+
+    /**
+     * 添加电影评论
+     * @author: zby
+     * @date: 2020年7月25日
+     * @return
+     */
+    @RequestMapping("discuss")
+    public ResultModel<Object> discuss(String movieId, String remark, @SessionAttribute("user") User user) {
+        try {
+            if (StringUtils.isEmpty(remark)) {
+                return new ResultModel<Object>().error("请添加信息");
+            }
+           movieCommentService.addMovieComment(user.getId(),movieId, remark);
+            return new ResultModel<Object>().success("感谢您的评价");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel<Object>().error("服务器处理异常，请稍后重试");
         }
     }
 }

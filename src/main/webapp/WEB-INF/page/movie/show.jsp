@@ -36,7 +36,7 @@
                         html += "<td>" + movie.movieName + "</td>";
                         html += "<td>" + movie.actorName + "</td>";
                         html += "<td>" + movie.baseName + "</td>";
-                        html += "<td>" + movie.longTime + "</td>";
+                        html += "<td>" + movie.longTime +"分钟"+ "</td>";
                         html += "<td>" + movie.topTime + "</td>";
 
                         html +=	"<td>";
@@ -123,6 +123,7 @@
                 content:"<%=request.getContextPath()%>/movie/toAdd",
             });
         }
+        //跳用户订单展示
         function myMovie(){
             location.href = "<%=request.getContextPath()%>/userOrder/toShow"
         }

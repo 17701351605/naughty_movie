@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
@@ -32,12 +33,13 @@ public class UserController {
      * @Date
      */
     @RequestMapping("login")
-    public ResultModel login(User user){
+    public ResultModel login(User user, HttpSession session){
         try {
             User user1 = userService.findNameAndPwd(user);
             if (null == user1){
                 return new ResultModel().error(0,"账户或密码有误，请重新输入");
             }
+            session.setAttribute("user", user1);
             return new ResultModel().success();
         } catch (Exception e) {
             e.printStackTrace();

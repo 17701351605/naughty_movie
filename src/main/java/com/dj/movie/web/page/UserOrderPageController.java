@@ -7,6 +7,7 @@ import com.dj.movie.service.MovieOfficeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -30,8 +31,8 @@ public class UserOrderPageController {
      * @author fzz
      * @return
      */
-    @RequestMapping("toByTicket")
-    public String toByTicket(Integer id, Model model) throws Exception{
+    @RequestMapping("toByTicket/{id}")
+    public String toByTicket(@PathVariable Integer id, Model model) throws Exception{
         QueryWrapper<BaseData> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("parent_id",9);
         //该场次的电影信息

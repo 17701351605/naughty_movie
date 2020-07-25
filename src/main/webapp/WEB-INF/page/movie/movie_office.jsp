@@ -27,8 +27,6 @@
                     for (var i = 0; i < data.data.length; i++) {
                         var m = data.data[i];
                         html += "<tr>";
-                        html += "<td>" + m.id + "</td>";
-                        html += "<td>" + m.playHall + "</td>";
                         html += "<td>" + m.movieName + "</td>";
                         html += "<td>" + m.playHall + "</td>";
                         html += "<td>" + m.price + "</td>";
@@ -104,12 +102,11 @@
 </form>
 <table border="1px" cellpadding=20px" cellspacing="0px" align="center">
     <tr>
-        <td>id</td>
-        <td>电影ID</td>
+        <td>电影名称</td>
         <td>影院播放厅</td>
-        <td>电影开始时间</td>
         <td>电影票单价</td>
         <td>电影剩余座位</td>
+        <td>电影开始时间</td>
         <td>操作</td>
     </tr>
     <tbody id="tb"></tbody>

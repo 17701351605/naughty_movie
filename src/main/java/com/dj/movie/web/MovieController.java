@@ -124,7 +124,7 @@ public class MovieController {
             //电影开始时间正序
             queryWrapper.orderByAsc("start_time");
             //电影id
-            queryWrapper.eq("movie_id", 1);
+            queryWrapper.eq("movie_id", movieId);
             //查询未删除的
             queryWrapper.eq("is_del", 1);
             //展示当前时间后的电影场次
@@ -141,7 +141,6 @@ public class MovieController {
                 queryWrapper.le("start_time", endTime1);
             }
             List<MovieOffice> movieOffice = movieOfficeService.list(queryWrapper);
-            // List<MovieOffice> movieOffice = movieOfficeService.findMovieOfficeByMovieId(1);
             return new ResultModel<Object>().success(movieOffice);
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,22 +159,23 @@ public class MovieController {
      * @date: 2020年7月23日
      */
     @RequestMapping("toLike")
-    public ResultModel<Object> toLike(Integer movieId/*, @SessionAttribute("user") User user*/) {
+    public ResultModel<Object> toLike(Integer movieId, @SessionAttribute("user") User user) {
         try {
             //根据登陆获取的用户id进行查询
-            MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(1, 1);
+            MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), movieId);
             //判断用户是否点赞
             if(movieLike!=null){
-                if (movieLike.getIsLike() == 1) {
+                if (movieLike.getIsLike()!=null && movieLike.getIsLike() == 1) {
                     //取消点赞
-                    movieLikeService.updateMovieLikeIsLike(1,1,0);
+                    movieLikeService.updateMovieLikeIsLike(user.getId(),movieId,0);
                     return new ResultModel<Object>().success("取消成功,感谢您的支持");
+                } else {
+                    //点赞
+                    movieLikeService.updateMovieLikeIsLike(user.getId(),movieId,1);
+                    return new ResultModel<Object>().success("点赞成功");
                 }
-                //点赞
-                movieLikeService.updateMovieLikeIsLike(1,1,1);
-                return new ResultModel<Object>().success("点赞成功");
             }
-            movieLikeService.addMovieLikeByUserIdAndMovieId(1,1,1);
+            movieLikeService.addMovieLikeByUserIdAndMovieId(user.getId(),movieId,1);
             return new ResultModel<Object>().success("点赞成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -192,17 +192,17 @@ public class MovieController {
      * @date: 2020年7月24日
      */
     @RequestMapping("updateMovieLikeScore")
-    public ResultModel<Object> updateMovieLikeScore(Integer score, Integer movieId/*, @SessionAttribute("user") User user*/) {
+    public ResultModel<Object> updateMovieLikeScore(Integer score, Integer movieId, @SessionAttribute("user") User user) {
         try {
             //根据登陆获取的用户id进行查询
-            MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(1, 1);
+            MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), movieId);
             //若查询为空则进行新增
             if (movieLike == null){
-                movieLikeService.addMovieLike(1, 1, score);
+                movieLikeService.addMovieLike(user.getId(), movieId, score);
             }
             //若查询不为空并且未进行评分则进行修改添加评分
             if (movieLike != null && movieLike.getScore()==null) {
-                movieLikeService.updateMovieLikeScore(1, 1, score);
+                movieLikeService.updateMovieLikeScore(user.getId(), movieId, score);
             }
             return new ResultModel<Object>().success();
         } catch (Exception e) {
@@ -303,12 +303,12 @@ public class MovieController {
      * @return
      */
     @RequestMapping("discuss")
-    public ResultModel<Object> discuss(Integer mId, String remark) {
+    public ResultModel<Object> discuss(Integer movieId, String remark, @SessionAttribute("user") User user) {
         try {
             if (StringUtils.isEmpty(remark)) {
                 return new ResultModel<Object>().error("请添加信息");
             }
-           movieCommentService.addMovieComment(2,2, remark);
+           movieCommentService.addMovieComment(user.getId(),movieId, remark);
             return new ResultModel<Object>().success("感谢您的评价");
         } catch (Exception e) {
             e.printStackTrace();

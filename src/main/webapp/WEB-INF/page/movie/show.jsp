@@ -49,6 +49,7 @@
                         }else{
                             html += "<input type = 'button' value = '上架' onclick = 'statuss(1,"+movie.id +")'/>";
                         }
+                        html += "<input type = 'button' value = '电影详情' onclick = 'toMovieComment("+movie.id +")'/>";
                         html += "</td>";
                         html += "</tr>";
                     }
@@ -128,10 +129,12 @@
             location.href = "<%=request.getContextPath()%>/userOrder/toShow"
         }
 
+
         function selectMovie() {
             $("#pageNo").val(1);
             search();
         }
+
         //分页
         function page(temp, pages) {
             var page = $("#pageNo").val();
@@ -151,8 +154,12 @@
             }
             search();
         }
-    </script>
 
+        //跳电影详情展示
+        function toMovieComment(movieId) {
+            location.href = "<%=request.getContextPath()%>/movie/toMovieDetail?movieId=" + movieId;
+        }
+    </script>
 </head>
 <input type="button" value="我的影票" onclick="myMovie()"/>
 <body style="text-align:center">

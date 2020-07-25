@@ -29,7 +29,7 @@
 
         function search() {
             $.post("<%=request.getContextPath()%>/movie/evaluatShow",
-                {},
+                {"movieId":${movie.movieId}},
                 function (data) {
                     var html = "";
                     for (var i = 0; i < data.data.length; i++) {
@@ -139,7 +139,7 @@
         }
 
         /** 去场次 */
-        function toCinema(id){
+        function toMovieOffice(id){
             window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?movieId=" + ${movie.movieId};
         }
     </script>

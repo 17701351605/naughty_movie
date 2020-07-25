@@ -22,6 +22,9 @@ public class MovieComment {
     /** 用户id*/
     private Integer userId;
 
+    /** 用户id*/
+    private String userName;
+
     /** 评价*/
     private String remark;
 

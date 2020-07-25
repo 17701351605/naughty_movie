@@ -7,5 +7,6 @@ import java.util.zip.DataFormatException;
 
 public interface MovieCommentMapper extends BaseMapper<MovieComment> {
 
-    void addMovieComment(@Param("userId") Integer userId, @Param("MovieId") Integer MovieId, @Param("remark") String remark) throws DataFormatException;
+    void addMovieComment(@Param("userId") Integer userId, @Param("userName") String userName, @Param("MovieId") Integer MovieId,
+                         @Param("remark") String remark) throws DataFormatException;
 }

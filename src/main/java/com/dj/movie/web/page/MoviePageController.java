@@ -5,6 +5,7 @@ import com.dj.movie.service.MovieLikeService;
 import com.dj.movie.service.BaseDataService;
 import com.dj.movie.service.MovieOfficeService;
 import com.dj.movie.service.MovieService;
+import com.sun.el.lang.ELArithmetic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -49,6 +51,20 @@ public class MoviePageController {
             }
         } else {
             model.addAttribute("score", null);
+        }
+        //评分
+        BigDecimal grade = movieLikeService.markGrade(id);
+        if (grade == null){
+            model.addAttribute("grade", "还未进行评分");
+        }else {
+            model.addAttribute("grade", grade.setScale(1, BigDecimal.ROUND_HALF_UP));
+        }
+        //点赞数
+        Integer like = movieLikeService.isLike(id);
+        if (grade == null){
+            model.addAttribute("like", "暂未点赞");
+        }else {
+            model.addAttribute("like",like);
         }
         model.addAttribute("movie", movie);
         model.addAttribute("user", user);

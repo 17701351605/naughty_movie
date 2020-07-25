@@ -303,7 +303,7 @@ public class MovieController {
             if (StringUtils.isEmpty(remark)) {
                 return new ResultModel<Object>().error("请添加信息");
             }
-           movieCommentService.addMovieComment(user.getId(),Integer.valueOf(movieId), remark);
+           movieCommentService.addMovieComment(user.getId(), user.getUsername(), Integer.valueOf(movieId), remark);
             return new ResultModel<Object>().success("感谢您的评价");
         } catch (Exception e) {
             e.printStackTrace();

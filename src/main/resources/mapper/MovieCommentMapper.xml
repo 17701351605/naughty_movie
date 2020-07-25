@@ -6,7 +6,7 @@
         id,movie_id,user_id,remark,create_time
     </sql>
     <insert id="addMovieComment">
-        insert into movie_comment (movie_id,user_id,remark,create_time) values (#{MovieId},#{userId},#{remark},now())
+        insert into movie_comment (movie_id,user_id,user_name,remark,create_time) values (#{MovieId},#{userId},#{userName},#{remark},now())
     </insert>
 
 </mapper>

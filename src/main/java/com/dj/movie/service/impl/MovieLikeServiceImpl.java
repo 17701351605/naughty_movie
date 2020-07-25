@@ -5,7 +5,10 @@ import com.dj.movie.mapper.MovieLikeMapper;
 import com.dj.movie.pojo.MovieLike;
 import com.dj.movie.service.MovieLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 @Service
 public class MovieLikeServiceImpl extends ServiceImpl<MovieLikeMapper, MovieLike> implements MovieLikeService {
@@ -36,6 +39,16 @@ public class MovieLikeServiceImpl extends ServiceImpl<MovieLikeMapper, MovieLike
     @Override
     public void addMovieLikeByUserIdAndMovieId(Integer userId, String MovieId, Integer isLike) throws Exception {
         movieLikeMapper.addMovieLikeByUserIdAndMovieId(userId, MovieId, isLike);
+    }
+
+    @Override
+    public BigDecimal markGrade(Integer id) throws Exception {
+        return movieLikeMapper.markGrade(id);
+    }
+
+    @Override
+    public Integer isLike(Integer id) throws DataAccessException {
+        return movieLikeMapper.isLike(id);
     }
 
 

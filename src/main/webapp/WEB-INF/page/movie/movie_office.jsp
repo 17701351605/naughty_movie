@@ -8,13 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/jquery.validate.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/localization/messages_zh.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/static/My97DatePicker/WdatePicker.js"></script>
-    <script type="text/javascript">
+<title>Title</title>
+<script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/jquery.validate.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/localization/messages_zh.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/static/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/static/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
         $(function(){
             search();
         })
@@ -139,7 +140,12 @@
     <c:if test="${user.level == 1}">
         <input type="button" value="增加" onclick="add()"/><br/><br/>
     </c:if>
-    场次查询：<input type="text" name="startingTime"/>~<input type="text" name="endTime"/><br/>
+    场次查询：
+    开始时间：
+    <input class="Wdate" type="text" name="startingTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+1}'})" >
+~
+    <input class="Wdate" type="text" name="endTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+1}'})" ><br>
+
     <input type="button" value="查询" onclick="search()"/>
 </form>
 <table border="1px" cellpadding=20px" cellspacing="0px" align="center">

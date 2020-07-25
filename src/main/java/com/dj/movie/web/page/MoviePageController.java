@@ -1,10 +1,7 @@
 package com.dj.movie.web.page;
 
-import com.dj.movie.pojo.BaseData;
-import com.dj.movie.pojo.Movie;
-import com.dj.movie.pojo.MovieLike;
+import com.dj.movie.pojo.*;
 import com.dj.movie.service.MovieLikeService;
-import com.dj.movie.pojo.MovieOffice;
 import com.dj.movie.service.BaseDataService;
 import com.dj.movie.service.MovieOfficeService;
 import com.dj.movie.service.MovieService;
@@ -14,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -73,8 +72,9 @@ public class MoviePageController {
      * @author: CYS
      */
     @RequestMapping("toMovieShow")
-    private String toMovieShow(Model model) throws Exception {
+    private String toMovieShow(Model model ,@SessionAttribute("user") User user) throws Exception {
         List<BaseData> list = baseDataService.findAllByPId(1);
+        model.addAttribute("user",user);
         model.addAttribute("list", list);
         return "movie/show";
     }

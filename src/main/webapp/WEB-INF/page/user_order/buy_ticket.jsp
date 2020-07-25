@@ -39,7 +39,7 @@
                         }
                         layer.msg(data.msg, {icon: 6, time: 2000},
                             function(){
-                                parent.location.href="<%=request.getContextPath()%>/movie/toMovieShow";
+                                parent.location.href="<%=request.getContextPath()%>/userOrder/toShow";
                                 layer.close(index);
                             });
                     });

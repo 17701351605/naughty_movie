@@ -21,7 +21,7 @@
             var index = layer.load(1, {shade: 0.2});
 
             $.post("<%=request.getContextPath()%>/userOrder/list",
-                {"page":$("#page").val(),"a":1},
+                {"page":$("#page").val()},
                 function(data){
                     layer.close(index);
                     var html = "";
@@ -72,7 +72,7 @@
         //退票
         function del(id){
             var index = layer.load(2, {shade: 0.3});
-            $.post("<%=request.getContextPath()%>/userorder/del",
+            $.post("<%=request.getContextPath()%>/userOrder/del",
                 {"id":id},
                 function(data){
                     if(data.code != 200){

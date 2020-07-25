@@ -42,7 +42,7 @@
                         html += "<input type = 'button' value = '电影详情' onclick = 'toComment("+movie.id +")'/>";
                         if (${user.level == 1}) {
                             html += "<input type = 'button' value = '修改' onclick = 'update("+movie.id +")'/>";
-                            html += "<input type = 'button' value = '删除' onclick = 'del("+movie.id +")'/>";
+                            /*html += "<input type = 'button' value = '删除' onclick = 'del("+movie.id +")'/>";*/
                             if (movie.status==1) {
                                 html += "<input type = 'button' value = '下架' onclick = 'statuss(0,"+movie.id +")'/>";
                             }else{
@@ -66,10 +66,10 @@
             location.href = "<%=request.getContextPath()%>/movie/toMovieDetail/" + id;
         }
 
-        //删除
+        /*//删除
         function del(id){
             var index = layer.load(1, {shade: 0.2});
-            $.post("<%=request.getContextPath()%>/movie/del/",
+            $.post("<%=request.getContextPath()%>/movie/del",
                 {"id":id,"isDel":0},
                 function(data){
                     if (data.code != 200) {
@@ -83,7 +83,7 @@
                             layer.close(index);
                         });
                 });
-        }
+        }*/
 
         //修改
         function update(id) {

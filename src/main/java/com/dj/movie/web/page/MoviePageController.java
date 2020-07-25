@@ -41,7 +41,7 @@ public class MoviePageController {
     public String toMovieDetail(@PathVariable Integer id, Model model, @SessionAttribute("user") User user) throws Exception {
         Movie movie = movieService.findMovieById(id);
         MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), String.valueOf(id));
-        if (movieLike != null) {
+        if (movieLike != null && movieLike.getScore() !=null) {
             if (movieLike.getScore() != null) {
                 model.addAttribute("score", movieLike.getScore());
             } else {
@@ -63,9 +63,8 @@ public class MoviePageController {
      * @date: 2020年7月23日
      */
     @GetMapping("toMovieOffice")
-    public String toMovieOffice(String movieId, Model model) throws Exception {
-        //电影表的主键id
-        model.addAttribute("movieId", movieId);
+    public String toMovieOffice(Integer id, Model model) throws Exception {
+        model.addAttribute("movieId", id);
         return "movie/movie_office";
     }
 
@@ -75,7 +74,7 @@ public class MoviePageController {
      * @author: CYS
      */
     @RequestMapping("toMovieShow")
-    private String toMovieShow(Model model ,@SessionAttribute("user") User user) throws Exception {
+    private String toMovieShow(Model model , @SessionAttribute("user") User user) throws Exception {
         List<BaseData> list = baseDataService.findAllByPId(1);
         model.addAttribute("user",user);
         model.addAttribute("list", list);
@@ -127,6 +126,7 @@ public class MoviePageController {
         MovieOffice movieOffice = movieOfficeService.findMovieOficeById(id);
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String format = timeFormatter.format(movieOffice.getStartTime());
+        model.addAttribute("officeList",baseDataService.findAllByPId(9));
         model.addAttribute("startTime",format);
         model.addAttribute("movieOffice",movieOffice);
         return "movie/update_movie_office";
@@ -138,9 +138,13 @@ public class MoviePageController {
      * @return
      */
     @RequestMapping("toMovieOfficeAdd")
-    public String toAdd( Integer id,Model model) {
-       // Movie movie = movieService.getById(id);
-        /*model.addAttribute("movie",movie);*/
+    public String toAdd( Integer id,Model model) throws Exception{
+        Movie movie = movieService.findMovieById(id);
+        //电影信息
+        model.addAttribute("movie",movie);
+        //播放厅
+        model.addAttribute("officeList",baseDataService.findAllByPId(9));
         return "movie/add_movie_office";
     }
+
 }

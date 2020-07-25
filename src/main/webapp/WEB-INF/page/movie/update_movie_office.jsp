@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -95,7 +96,12 @@
 
     电影名称:${movieOffice.movieName}<input type="hidden" name="movieName" value="${movieOffice.movieName}" /><br/>
 
-    播放厅：<input type="text" value="${movieOffice.playHall}" name="playHall" ><br/>
+    播放厅:
+    <select name="playHall">
+        <c:forEach items="${officeList}" var="o">
+            <option value="${o.id}" <c:if test="${o.id == movieOffice.playHall}">selected</c:if> >${o.baseName}</option>
+        </c:forEach>
+    </select><br/>
 
     开始时间:
     <input class="Wdate" type="text"  value="${startTime}" name="startTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+1}'})" ><br/>

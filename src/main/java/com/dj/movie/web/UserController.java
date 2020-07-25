@@ -109,8 +109,14 @@ public class UserController {
         }
     }
 
+    /**
+     * 邮箱验证码登录
+     * @Return
+     * @Author Caohj
+     * @Date
+     */
     @RequestMapping("codeLogin")
-    public ResultModel codeLogin(User user){
+    public ResultModel codeLogin(User user, HttpSession session){
         try {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("email", user.getEmail());
@@ -122,6 +128,7 @@ public class UserController {
             if (System.currentTimeMillis() > user1.getCodeTime().toInstant(ZoneOffset.of("+8")).toEpochMilli()){
                 return new ResultModel().error(0,"验证码已失效，请重新获取");
             }
+            session.setAttribute("user", user1);
             return new ResultModel().success();
         } catch (Exception e) {
             e.printStackTrace();

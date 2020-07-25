@@ -28,7 +28,13 @@
                         var m = data.data[i];
                         html += "<tr>";
                         html += "<td>" + m.movieName + "</td>";
-                        html += "<td>" + m.playHall + "</td>";
+                        if (m.playHall ==10 ){
+                            html += "<td>一号播放厅</td>";
+                        } else if (m.playHall ==11){
+                            html += "<td>二号播放厅</td>";
+                        } else {
+                            html += "<td>三号播放厅</td>";
+                        }
                         html += "<td>" + m.price + "</td>";
                         html += "<td>" + m.seating + "</td>";
                         html += "<td>" + m.startTime + "</td>";
@@ -40,7 +46,7 @@
                         }
                         /**登录人为用户显示购买和团购*/
                         if (${user.level ==0}){
-                            html +="<input type='button' onclick='buyTicket(" +m.id+ ")' value='购票' />";
+                            html +="<input type='button' onclick='buyTicket(" +m.id+ ","+m.seating+")' value='购票' />";
                             /** 剩余票数和总票数相等  显示团购按钮 */
                             if (m.seating == 50){
                                 html += "<input type='button' onclick='tuanGou(" +m.id+ ")' value='团购' />";
@@ -55,10 +61,29 @@
 
         /** id 播放厅的主键id */
         function tuanGou(id) {
-            window.location.href="<%=request.getContextPath()%>/userOrder/tuanGou/"+id;
+            var index = layer.load(1, {shade: 0.2});
+            $.post("<%=request.getContextPath()%>/userOrder/tuanGou/"+id,
+                {},
+                function(data){
+                    if (data.code != 200) {
+                        layer.msg(data.msg);
+                        layer.close(index);
+                        return;
+                    }
+                    layer.msg(data.msg, {icon: 6, time: 2000},
+                        function(){
+                            window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?id="+${movieId};
+                            layer.close(index);
+                        });
+                });
         }
+
         /** id 播放厅的主键id */
-        function buyTicket(id){
+        function buyTicket(id, seating){
+            if (seating == 0){
+                layer.msg("票以售罄", {icon: 5, time: 2000});
+                return;
+            }
             window.location.href="<%=request.getContextPath()%>/userOrder/toByTicket/"+id;
         }
 

@@ -45,6 +45,7 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
         userOrder.setBuyNumber(buyNum);
         userOrder.setCreateTime(LocalDateTime.now());
         userOrder.setIsDel(1);
+        userOrder.setStatus(1);
         userOrderMapper.insert(userOrder);
 
         UpdateWrapper<MovieOffice> updateWrapper = new UpdateWrapper<>();

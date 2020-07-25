@@ -8,5 +8,8 @@
     <sql id="M">
         id,movie_id,movie_name,play_hall,price,seating,start_time,is_del
     </sql>
+    <select id="findMovieOficeById" resultType="com.dj.movie.pojo.MovieOffice">
+        select m.*  from movie_office m where id = #{id}
+    </select>
 
 </mapper>

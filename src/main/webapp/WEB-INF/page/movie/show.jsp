@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>Title</title>
@@ -35,7 +36,7 @@
                         html += "<td>" + movie.movieName + "</td>";
                         html += "<td>" + movie.actorName + "</td>";
                         html += "<td>" + movie.baseName + "</td>";
-                        html += "<td>" + movie.longTime + "</td>";
+                        html += "<td>" + movie.longTime +"分钟"+"</td>";
                         html += "<td>" + movie.topTime + "</td>";
 
                         html +=	"<td>";
@@ -118,32 +119,32 @@
                 title: '添加',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['480px', '90%'],
+                area: ['500px', '90%'],
                 content:"<%=request.getContextPath()%>/movie/toAdd",
             });
         }
+        //跳用户订单展示
         function myMovie(){
             location.href = "<%=request.getContextPath()%>/userOrder/toShow"
         }
-
 
         function selectMovie() {
             $("#pageNo").val(1);
             search();
         }
-
+        //分页
         function page(temp, pages) {
             var page = $("#pageNo").val();
             if (temp == 0) {
                 if (parseInt(page) - 1 < 1) {
-                    layer.alert("已是首页",{icon : 6,time:2000});
+                    layer.msg("已是首页",{icon : 7,time:2000});
                     return;
                 }
                 $("#pageNo").val(parseInt(page) - 1);
             }
             if (temp == 1) {
                 if (parseInt(page) + 1 > pages) {
-                    layer.alert("已经尾页了", {icon : 5,time:2000});
+                    layer.msg("已经尾页了", {icon : 5,time:2000});
                     return;
                 }
                 $("#pageNo").val(parseInt(page) + 1);
@@ -156,19 +157,16 @@
 <input type="button" value="我的影票" onclick="myMovie()"/>
 <body style="text-align:center">
 <form id="fm">
-    <c:if test="${user.level == 1}">
+   <%-- <c:if test="${user.level == 1}">--%>
         <input type="button" value='增加电影' onclick='addMovie()'/><br/>
-    </c:if>
+   <%-- </c:if>--%>
     <input type="hidden" name="pageNo" value="1" id="pageNo"/>
+    <input type="hidden" name="status" value="1" />
     电影名称：<input type="text" name="movieName"/><br/>
     类型：
-    战争<input type="checkbox" name="baseName" value="2"/>
-    武侠<input type="checkbox" name="baseName" value="3"/>
-    动漫<input type="checkbox" name="baseName" value="4"/>
-    科幻<input type="checkbox" name="baseName" value="5"/>
-    悬疑<input type="checkbox" name="baseName" value="6"/>
-    恐怖<input type="checkbox" name="baseName" value="7"/>
-    爱情<input type="checkbox" name="baseName" value="8"/>
+    <c:forEach items="${list}" var="a">
+        ${a.baseName} <input type="checkbox" name="movieType" value="${a.id}" />
+    </c:forEach>
     <input type="button" value="查询" onclick="selectMovie()">
 </form>
 <table align="center">

@@ -3,20 +3,10 @@
 <mapper namespace="com.dj.movie.mapper.MovieCommentMapper">
 
     <sql id="COMMENT">
-        id,movie_id,user_id,remark,is_like,create_time
+        id,movie_id,user_id,remark,create_time
     </sql>
+    <insert id="addMovieComment">
+        insert into movie_comment (movie_id,user_id,remark,create_time) values (#{MovieId},#{userId},#{remark},now())
+    </insert>
 
-    <select id="findMovieCommentByUserId" resultType="com.dj.movie.pojo.MovieComment">
-        select <include refid="COMMENT"/> from movie_comment where user_id = #{userId}
-    </select>
-
-    <update id="updateMovieCommentIsLike">
-        update movie_comment
-        <set>
-            is_like = 1
-        </set>
-        <where>
-            user_id = #{userId}
-        </where>
-    </update>
 </mapper>

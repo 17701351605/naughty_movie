@@ -106,7 +106,6 @@ public class UserOrderController {
             MovieOffice movieOffice = movieOfficeService.getById(movie.getId());
             //当前时间和电影开始的时间比较
             LocalDateTime localDateTime = LocalDateTime.now();
-            System.out.println(localDateTime);
             //如果当前时间大于电影开始的时间，无法退票
             if (System.currentTimeMillis() > movieOffice.getStartTime().toInstant(ZoneOffset.of("+8")).toEpochMilli()) {
                 return new ResultModel<>().error("电影已开场,您已操过退票时间,无法为您退票");

@@ -25,12 +25,6 @@ public class MovieComment {
     /** 评价*/
     private String remark;
 
-    /** 点赞*/
-    private Integer isLike;
-
-    /** 评分*/
-    private Integer score;
-
     /** 评价时间*/
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") //接收前台日期格式
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8") //返回前台格式

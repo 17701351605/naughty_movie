@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface MovieOfficeService extends IService<MovieOffice> {
 
-
+    MovieOffice findMovieOficeById(Integer id) throws Exception;
 
 }

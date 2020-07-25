@@ -1,4 +1,4 @@
-package com.dj.movie.config;
+package com.dj.movie.pojo.query;
 
 import lombok.Data;
 
@@ -9,14 +9,12 @@ import java.io.Serializable;
  * 连表分页查询
  */
 @Data
-public class UserQuery implements Serializable {
+public class MovieQuery implements Serializable {
 
     private Integer pageNo = 1;
 
     private Integer pageSize = 2;
 
     private Integer pages;
-
-    private Integer status;
 
 }

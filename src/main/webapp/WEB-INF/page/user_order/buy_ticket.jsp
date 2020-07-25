@@ -70,18 +70,11 @@
 
         /**取消购买*/
         function back(){
-            window.location.href="<%=request.getContextPath()%>/user/"+${movie.movieId};
+            window.location.href="<%=request.getContextPath()%>/toMovieOffice？i?id="+${movie.movieId};
         }
 
-        /** id 播放厅的主键id */
-        function tuanGou(id) {
-            window.location.href="<%=request.getContextPath()%>/userOrder/tuanGou/"+id;
-        }
-        /** 剩余票数和总票数相等 并且登录人为普通人 显示团购按钮 */
-        //别删
-       /* if (movie.seating == 50 && ${user.id == 0}){
-            html += "<input type='button' onclick='tuanGou()' value='团购' />";
-        }*/
+
+
     </script>
 </head>
 <style>

@@ -140,7 +140,8 @@
 
         /** 去场次 */
         function toMovieOffice(id){
-            window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?movieId=" + ${movie.id};
+            alert(id);
+            window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?id=" + ${movie.id};
         }
     </script>
     <style>
@@ -159,7 +160,7 @@
     <button id="hide">隐藏</button>
     <button id="show">评论</button>
 </c:if>
-<input type = 'button' value = '查看场次' onclick = 'toMovieOffice("+movie.id+")'/><br/>
+<input type = 'button' value = '查看场次' onclick = 'toMovieOffice("${movie.id}")'/><br/>
 <c:if test="${user.level == 0}">
     电影评分:<div id="test2"></div>
 </c:if>

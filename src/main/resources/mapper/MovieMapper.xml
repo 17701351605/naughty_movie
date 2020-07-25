@@ -18,7 +18,7 @@
         is_del,
     </sql>
     <select id="findMovieAll" resultType="com.dj.movie.pojo.Movie">
-       SELECT
+            SELECT
             m.id,
             m.movie_id,
             m.movie_name,
@@ -32,9 +32,19 @@
             b.base_name
             FROM movie m
             LEFT JOIN base_data b on m.movie_type = b.id
-            where m.status = 1 and m.is_del = 1
-
-    </select>
+            <where>
+                m.status = #{status} and m.is_del = 1
+                <if test="null != movieName and movieName != '' ">
+                    and m.movie_name like "%"#{movieName}"%"
+                </if>
+                <if test="null != movieType and movieType != '' ">
+                    and movie_type in
+                    <foreach collection="movieType" item="movieType" open="(" close=")" separator=",">
+                        #{movieType}
+                    </foreach>
+                </if>
+            </where>
+     </select>
 
     <select id="findMovieByMovieId" resultType="com.dj.movie.pojo.Movie">
         select <include refid="MOVIE"/> from movie where movie_id = #{movieId}

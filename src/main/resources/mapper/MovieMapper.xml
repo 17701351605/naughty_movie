@@ -33,7 +33,13 @@
             FROM movie m
             LEFT JOIN base_data b on m.movie_type = b.id
             <where>
-                m.status = #{status} and m.is_del = 1
+                <if test="user.level == 1">
+                    1 = 1
+                </if>
+                <if test="user.level == 0">
+                    m.status = #{status} and m.is_del = 1
+                </if>
+
                 <if test="null != movieName and movieName != '' ">
                     and m.movie_name like "%"#{movieName}"%"
                 </if>

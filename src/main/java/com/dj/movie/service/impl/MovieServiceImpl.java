@@ -3,6 +3,7 @@ package com.dj.movie.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.dj.movie.pojo.User;
 import com.dj.movie.pojo.query.MovieQuery;
 import com.dj.movie.mapper.MovieMapper;
 import com.dj.movie.pojo.Movie;
@@ -24,10 +25,10 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
 
 
     @Override
-    public List<Movie> findMovieAll(MovieQuery query,String movieName ,Integer status, Integer[] movieType) {
+    public List<Movie> findMovieAll(MovieQuery query, String movieName , Integer status, Integer[] movieType, User user) {
         IPage<Movie> page1 = new Page<>(query.getPageNo(), query.getPageSize());
         // 分页后的信息
-        IPage<Movie> pageInfo = getBaseMapper().findMovieAll(page1, query, movieName, status, movieType);
+        IPage<Movie> pageInfo = getBaseMapper().findMovieAll(page1, query, movieName, status, movieType,user);
         query.setPages((int) pageInfo.getPages());
         List<Movie> movieList = pageInfo.getRecords();
         return movieList;

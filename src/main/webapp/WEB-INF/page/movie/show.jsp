@@ -40,14 +40,16 @@
                         html += "<td>" + movie.topTime + "</td>";
 
                         html +=	"<td>";
-                      /*  if (${user.level == 1}) {*/
+                        if (${user.level == 1}) {
                             html += "<input type = 'button' value = '修改' onclick = 'update("+movie.id +")'/>";
                             html += "<input type = 'button' value = '删除' onclick = 'del("+movie.id +")'/>";
-                        /*}*/
-                        if (movie.status==1) {
-                            html += "<input type = 'button' value = '下架' onclick = 'statuss(0,"+movie.id +")'/>";
-                        }else{
-                            html += "<input type = 'button' value = '上架' onclick = 'statuss(1,"+movie.id +")'/>";
+                        }
+                        if (${user.level == 1}) {
+                            if (movie.status == 1) {
+                                html += "<input type = 'button' value = '下架' onclick = 'statuss(0," + movie.id + ")'/>";
+                            } else {
+                                html += "<input type = 'button' value = '上架' onclick = 'statuss(1," + movie.id + ")'/>";
+                            }
                         }
                         html += "</td>";
                         html += "</tr>";

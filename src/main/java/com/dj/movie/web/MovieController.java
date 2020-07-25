@@ -43,17 +43,11 @@ public class MovieController {
 
 
     @RequestMapping("show")
-    public ResultModel show(MovieQuery query, String movieName, Integer status ,Integer[] movieType){
+    public ResultModel show(MovieQuery query, String movieName, Integer status ,Integer[] movieType,@SessionAttribute("user")User user){
         /*  public ResultModel show(Movie movie, UserQuery query*//*, @SessionAttribute("user")User user*//*){*/
         try{
-          /*  //如果登录的是普通用户查状态为上架的
-            if (user.getLevel() == 0) {
-                query.setStatus(1);
-            } else {
-                query.setStatus(0);
-            }*/
             Map<String,Object> map = new HashMap<>();
-            List<Movie> movieList = movieService.findMovieAll(query, movieName, status, movieType);
+            List<Movie> movieList = movieService.findMovieAll(query, movieName, status, movieType,user);
             map.put("pages",query.getPages());
             map.put("movieList", movieList);
             return new ResultModel().success(map);

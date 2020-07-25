@@ -1,6 +1,7 @@
 package com.dj.movie.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.dj.movie.pojo.User;
 import com.dj.movie.pojo.query.MovieQuery;
 import com.dj.movie.pojo.Movie;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface MovieService extends IService<Movie> {
 
-    List<Movie> findMovieAll(MovieQuery query, String movieName, Integer status, Integer[] movieType);
+    List<Movie> findMovieAll(MovieQuery query, String movieName, Integer status, Integer[] movieType, User user);
 
     Movie findMovieByMovieId(Integer id) throws Exception;
 

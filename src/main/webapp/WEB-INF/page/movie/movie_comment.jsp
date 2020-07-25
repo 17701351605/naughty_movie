@@ -14,8 +14,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/layui/css/layui.css"  media="all">
-    <script src="<%=request.getContextPath()%>/static/layui/layui.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/movie_like/css/style.css"/>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/jquery.validate.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/localization/messages_zh.js"></script>
+    <script src="<%=request.getContextPath()%>/static/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/movie_like/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
 
         $(function(){
@@ -41,11 +46,15 @@
 
         /** 点赞 */
         function toLike(movieId){
+            var index = layer.load(1, {shade: 0.2});
             $.post("<%=request.getContextPath()%>/movie/toLike?movieId=" + movieId,
                 {},
                 function(data){
-                    alert(data.msg);
-                    return;
+                    layer.msg(data.msg, {icon: 6, time: 2000},
+                        function(){
+                            layer.close(index);
+                            return;
+                        });
                 })
         }
 
@@ -74,8 +83,8 @@
                 </c:if>
                 , text: true //开启文本
                 ,choose: function (value) {
-                    if (value < 4) alert('感谢您的支持')
-                    if (value >= 4) alert('么么哒，感谢您的支持')
+                    if (value < 4) layer.msg('感谢您的支持')
+                    if (value >= 4) layer.msg('么么哒，感谢您的支持')
                     $.post("<%=request.getContextPath()%>/movie/updateMovieLikeScore",
                         {"score": value, "movieId":${movie.movieId}},
                         function (data) {
@@ -90,7 +99,55 @@
         });
 
 
+        $(document).ready(function() {
+            $('body').on("click",'.heart',function() {
+                var A=$(this).attr("id");
+                var B=A.split("like");
+                var messageID=B[1];
+                var C=parseInt($("#likeCount"+messageID).html());
+                $(this).css("background-position","")
+                var D=$(this).attr("rel");
+                if(D === 'like') {
+                    $("#likeCount"+messageID).html(C+1);
+                    $(this).addClass("heartAnimation").attr("rel","unlike");
+                }
+                else {
+                    $("#likeCount"+messageID).html(C-1);
+                    $(this).removeClass("heartAnimation").attr("rel","like");
+                    $(this).css("background-position","left");
+                }
+            });
+        });
+
+        /** 电影评论*/
+        function discuss() {
+            var index = layer.load(1, {shade: 0.2});
+            $.post("<%=request.getContextPath()%>/movie/discuss",
+                {"movieId":${movie.movieId}, "remark": $("#remark").val()},
+                function (data) {
+                    if (data.code != 200) {
+                        layer.msg(data.msg);
+                        layer.close(index);
+                        return;
+                    }
+                    layer.msg(data.msg, {icon: 6, time: 2000},
+                        function(){
+                            layer.close(index);
+                            location.href = "<%=request.getContextPath()%>/movie/toMovieDetail?movieId=" + ${movie.movieId};
+                        });
+                })
+        }
+
+        /** 去场次 */
+        function toCinema(id){
+            window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?movieId=" + ${movie.movieId};
+        }
     </script>
+    <style>
+        .box{
+            display: inline-block;
+        }
+    </style>
 </head>
 <body style="text-align: center">
 <div id="test1"></div>
@@ -100,8 +157,21 @@
 <input type='button' value='点赞' onclick='toLike("${movie.movieId}")'/>
 
 <button id="hide">隐藏</button>
-<button id="show">评论</button><br/>
-<div id="test2"></div>
+<button id="show">评论</button>
+<input type = 'button' value = '查看场次' onclick = 'toMovieOffice("+movie.id+")'/><br/>
+电影评分:<div id="test2"></div>
+<%--<article class="htmleaf-container">
+    <header class="htmleaf-header">
+    </header>
+    <div id="container">
+    </div>
+
+</article>--%>
+<div class="feed" id="feed2">
+    <div class="heart" id="like3" rel="like">
+        <div class="likeCount" id="likeCount3">24</div>
+    </div>
+</div>
 <table align="center">
     <tr>
         <td>相关评论:</td>

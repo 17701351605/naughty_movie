@@ -95,7 +95,7 @@
 </head>
 <body style="text-align: center">
 <form id="fm">
-    <input type="hidden" name="movieId" value="${m.id}"/>
+    <input type="hidden" name="movieId" value="${movieId}"/>
     <c:if test="${user.level == 1}">
         <input type="button" value="增加" onclick="add()"/><br/><br/>
     </c:if>

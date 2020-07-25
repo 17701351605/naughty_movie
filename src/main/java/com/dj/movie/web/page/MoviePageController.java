@@ -64,7 +64,8 @@ public class MoviePageController {
      * @date: 2020年7月23日
      */
     @GetMapping("toMovieOffice")
-    public String toMovieOffice() throws Exception {
+    public String toMovieOffice(Integer movieId, Model model) throws Exception {
+        model.addAttribute("movieId", movieId);
         return "movie/movie_office";
     }
 
@@ -76,6 +77,7 @@ public class MoviePageController {
     private String toMovieShow(){
         return "movie/show";
     }
+
     /**
      *去增加
      * @author: hwk

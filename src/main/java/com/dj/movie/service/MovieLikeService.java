@@ -2,7 +2,6 @@ package com.dj.movie.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dj.movie.pojo.MovieLike;
-import org.apache.ibatis.annotations.Param;
 
 
 public interface MovieLikeService extends IService<MovieLike> {
@@ -14,4 +13,6 @@ public interface MovieLikeService extends IService<MovieLike> {
     void addMovieLike (Integer userId, Integer MovieId, Integer score) throws Exception;
 
     void updateMovieLikeIsLike(Integer userId, Integer MovieId, Integer isLike) throws Exception;
+
+    void addMovieLikeByUserIdAndMovieId (Integer userId, Integer MovieId, Integer isLike) throws Exception;
 }

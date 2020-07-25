@@ -33,6 +33,10 @@ public class MovieLikeServiceImpl extends ServiceImpl<MovieLikeMapper, MovieLike
         movieLikeMapper.updateMovieLikeIsLike(userId, MovieId, isLike);
     }
 
+    @Override
+    public void addMovieLikeByUserIdAndMovieId(Integer userId, Integer MovieId, Integer isLike) throws Exception {
+        movieLikeMapper.addMovieLikeByUserIdAndMovieId(userId, MovieId, isLike);
+    }
 
 
 }

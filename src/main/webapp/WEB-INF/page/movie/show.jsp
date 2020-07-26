@@ -10,6 +10,8 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="<%=request.getContextPath()%>/static/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/static/css/demo.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/jquery.validate.js"></script>
@@ -126,7 +128,7 @@
                 title: '添加',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['500px', '90%'],
+                area: ['500px', '53%'],
                 content:"<%=request.getContextPath()%>/movie/toAdd",
             });
         }
@@ -163,6 +165,7 @@
 
     </script>
 </head>
+<body style="text-align:center;background:url(<%=request.getContextPath()%>/static/img/3.jpg)">
 <%--<input type="button" value="我的影票" onclick="myMovie()"/>--%>
 <body style="text-align:center">
 <form id="fm">

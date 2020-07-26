@@ -10,6 +10,7 @@
 <head>
     <title>Title</title>
     <!--必要样式-->
+
     <link href="<%=request.getContextPath()%>/static/css/styles.css" rel="stylesheet" type="text/css" />
     <link href="<%=request.getContextPath()%>/static/css/demo.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>

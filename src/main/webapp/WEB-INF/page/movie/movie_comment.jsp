@@ -13,9 +13,12 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="<%=request.getContextPath()%>/static/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/static/css/demo.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/layui/css/layui.css"  media="all">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/movie_like/css/style.css"/>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/Particleground.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/jquery.validate.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/localization/messages_zh.js"></script>
@@ -140,7 +143,6 @@
 
         /** 去场次 */
         function toMovieOffice(id){
-            alert(id);
             window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?id=" + ${movie.id};
         }
     </script>
@@ -150,7 +152,7 @@
         }
     </style>
 </head>
-<body style="text-align: center">
+<body style="text-align:center;color: #BEE9F0">
 <div id="test1"></div>
 电影名称:${movie.movieName} <br/>
 电影片长：${movie.longTime} <br/>
@@ -198,4 +200,11 @@
     <input type='button' value='评论提交' onclick='discuss()'/>
 </div>
 </body>
+<script type="text/javascript">
+    //粒子背景特效
+    $('body').particleground({
+        dotColor: '#E8DFE8',
+        lineColor: '#133b88'
+    });
+</script>
 </html>

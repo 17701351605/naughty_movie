@@ -76,7 +76,7 @@ public class UserController {
     @RequestMapping("register")
     public ResultModel register(User user){
         userService.save(user);
-        return new ResultModel().success(true);
+        return new ResultModel().success();
     }
 
     /**

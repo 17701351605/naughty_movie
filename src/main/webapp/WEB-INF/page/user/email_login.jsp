@@ -116,7 +116,7 @@
             </div>
             <input type="submit" id="btnSendCode" value="发送验证码"/>
             <div class='login_fields__submit'>
-                <input type='submit' value='登录' onclick="login()"><br/>
+                <input type='button' value='登录' onclick="codeLogin()"><br/>
                 <input type="button" value="去账号登录" onclick="toLogin()"/><br/>
                 <input type="button" value="没有帐号？去添加" onclick="toRegister()"/>
             </div>

@@ -123,13 +123,11 @@
             $.post("<%=request.getContextPath()%>/user/register",$("#fm").serialize(),
                 function (data) {
                     layer.close(index);
-                    if (data.data != true){
+                    if (data.data != "200"){
                         layer.msg("注册失败");
+                        return;
                     }
-                    layer.msg('注册成功！', {icon: 6, time: 2000},
-                        function(){
-                            parent.location.href="<%=request.getContextPath()%>/user/toLogin";
-                    });
+                    parent.location.href="<%=request.getContextPath()%>/user/toLogin";
             });
         }
     });
@@ -201,7 +199,7 @@
             <div class='login_fields__password'>
                 &nbsp&nbsp&nbsp
                 级别：&nbsp
-                普通用户<input name="level" type="radio" value="0" autocomplete="off"/>
+                普通用户<input name="level" type="radio" value="0" checked autocomplete="off"/>
                 商家<input name="level" type="radio" value="1" autocomplete="off"/>
             </div>
             <div class='login_fields__submit'>

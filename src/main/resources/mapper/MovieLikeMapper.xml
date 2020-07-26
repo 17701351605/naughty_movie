@@ -28,6 +28,22 @@
     <select id="findMovieLikeByUserIdAndMovieId" resultType="com.dj.movie.pojo.MovieLike">
         select <include refid="MOVIELIKE"/> from movie_like where user_id = #{userId} and movie_id =#{MovieId}
     </select>
+    <select id="isLike" resultType="java.lang.Integer">
+         SELECT
+            sum(is_like)
+        FROM
+            movie_like
+        WHERE
+            movie_id = #{id}
+    </select>
+    <select id="markGrade" resultType="java.math.BigDecimal">
+         SELECT
+            (SUM(score) * 2 / COUNT(0)) AS number
+        FROM
+            movie_like
+        WHERE
+	        movie_id = #{id}
+    </select>
 
     <update id="updateMovieLikeIsLike">
         update movie_like

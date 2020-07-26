@@ -15,7 +15,7 @@ public class MovieCommentServiceImpl extends ServiceImpl<MovieCommentMapper, Mov
     private MovieCommentMapper movieCommentMapper;
 
     @Override
-    public void addMovieComment(Integer userId, Integer MovieId, String remark) throws Exception {
-        movieCommentMapper.addMovieComment(userId, MovieId ,remark);
+    public void addMovieComment(Integer userId, String userName, Integer MovieId, String remark) throws Exception {
+        movieCommentMapper.addMovieComment(userId, userName, MovieId ,remark);
     }
 }

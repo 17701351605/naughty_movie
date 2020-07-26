@@ -35,7 +35,7 @@
                     for (var i = 0; i < data.data.length; i++) {
                         var movie = data.data[i];
                         html += "<tr>";
-                        html += "<td>" + movie.id + "</td>";
+                        html += "<td>" + movie.userName + "</td>";
                         html += "<td>" + movie.remark + "</td>";
                         html += "<td>" + movie.createTime + "</td>";
                         html += "</tr>";
@@ -155,6 +155,8 @@
 电影名称:${movie.movieName} <br/>
 电影片长：${movie.longTime} <br/>
 上线时间：${movie.topTime}<br/>
+评分:${grade}<br/>
+点赞数:${like}<br/>
 <c:if test="${user.level == 0}">
     <input type='button' value='点赞' onclick='toLike("${movie.id}")'/>
     <button id="hide">隐藏</button>
@@ -183,10 +185,16 @@
     <tr>
         <td>相关评论:</td>
     </tr>
+    <tr>
+        <td>用户名</td>
+        <td>评论</td>
+        <td>评论时间</td>
+    </tr>
     <tbody id="tb"></tbody>
 </table>
 <div id="testDiv" style="display:none">
     评论：<input type="text" name="remark" id="remark"/>
+
     <input type='button' value='评论提交' onclick='discuss()'/>
 </div>
 </body>

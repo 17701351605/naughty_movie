@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+    <link href="<%=request.getContextPath()%>/static/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/static/css/demo.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/static/layer/layer.js"></script>
 <script type="text/javascript" src="/static/validate/dist/jquery.validate.js"></script>

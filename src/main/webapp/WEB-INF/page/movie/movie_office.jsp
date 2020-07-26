@@ -9,6 +9,7 @@
 <html>
 <head>
 <title>Title</title>
+    <link href="<%=request.getContextPath()%>/static/css/styles.css" rel="stylesheet" type="text/css" /><link href="<%=request.getContextPath()%>/static/css/demo.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/jquery.validate.js"></script>
@@ -114,7 +115,7 @@
                 title: '修改',
                 shadeClose: true,
                 shade: 0.4,
-                area: ['480px', '90%'],
+                area: ['300px', '53%'],
                 content:"<%=request.getContextPath()%>/movie/toUpdateById/"+id ,
             });
             layer.close(index);
@@ -127,7 +128,7 @@
                 title: '添加',
                 shadeClose: true,
                 shade: 0.4,
-                area: ['500px', '80%'],
+                area: ['500px', '53%'],
                 content: '<%=request.getContextPath()%>/movie/toMovieOfficeAdd?id='+${movieId}
             });
             layer.close(index);

@@ -35,5 +35,7 @@ public class WebConfiguration implements WebMvcConfigurer {
         interceptorRegistration.excludePathPatterns("/user/register");
         interceptorRegistration.excludePathPatterns("/user/sendEmail");
         interceptorRegistration.excludePathPatterns("/user/codeLogin");
+        interceptorRegistration.excludePathPatterns("/user/out");
+
     }
 }

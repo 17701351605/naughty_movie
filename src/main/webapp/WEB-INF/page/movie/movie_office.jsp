@@ -10,7 +10,8 @@
 <html>
 <head>
 <title>Title</title>
-    <link href="<%=request.getContextPath()%>/static/css/styles.css" rel="stylesheet" type="text/css" /><link href="<%=request.getContextPath()%>/static/css/demo.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/static/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/static/css/demo.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/static/validate/dist/jquery.validate.js"></script>
@@ -49,10 +50,10 @@
                         }
                         /**登录人为用户显示购买和团购*/
                         if (${user.level ==0}){
-                            html +="<input type='button' onclick='buyTicket(" +m.id+ ","+m.seating+")' value='购票' />";
+                            html +="<input type='button' onclick='buyTicket("+m.id+","+m.seating+")' value='购票' />";
                             /** 剩余票数和总票数相等  显示团购按钮 */
                             if (m.seating == 50){
-                                html += "<input type='button' onclick='tuanGou(" +m.id+ ")' value='团购' />";
+                                html += "<input type='button' onclick='tuanGou("+m.id+")' value='团购' />";
                             }
                         }
                         html += "</td>";

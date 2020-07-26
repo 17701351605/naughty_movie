@@ -170,19 +170,6 @@
 <c:if test="${user.level == 0}">
     电影评分:<div id="test2"></div>
 </c:if>
-
-<%--<article class="htmleaf-container">
-    <header class="htmleaf-header">
-    </header>
-    <div id="container">
-    </div>
-
-</article>--%>
-<%--<div class="feed" id="feed2">
-    <div class="heart" id="like3" rel="like">
-        <div class="likeCount" id="likeCount3">24</div>
-    </div>
-</div>--%>
 <table align="center">
     <tr>
         <td>相关评论:</td>
@@ -200,11 +187,4 @@
     <input type='button' value='评论提交' onclick='discuss()'/>
 </div>
 </body>
-<script type="text/javascript">
-    //粒子背景特效
-    $('body').particleground({
-        dotColor: '#E8DFE8',
-        lineColor: '#133b88'
-    });
-</script>
 </html>

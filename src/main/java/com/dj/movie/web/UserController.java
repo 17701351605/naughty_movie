@@ -6,6 +6,7 @@ import com.dj.movie.pojo.User;
 import com.dj.movie.service.UserService;
 import com.dj.movie.utils.JavaEmailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -123,6 +124,9 @@ public class UserController {
     @RequestMapping("codeLogin")
     public ResultModel codeLogin(User user, HttpSession session) {
         try {
+            if (user.getEmail().equals("") || user.getCode() == null){
+                return new ResultModel().error(0, "邮箱或验证码不能为空，请输入");
+            }
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("email", user.getEmail());
             queryWrapper.eq("code", user.getCode());

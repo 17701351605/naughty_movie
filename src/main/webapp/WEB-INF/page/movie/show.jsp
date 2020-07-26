@@ -41,7 +41,7 @@
                         html += "<td>" + movie.longTime +"分钟"+"</td>";
                         html += "<td>" + movie.topTime + "</td>";
                         html +=	"<td>";
-                        html += "<input type = 'button' value = '电影详情' onclick = 'toComment("+movie.id +")'/>";
+                        html += "<input type = 'button' value = '电影详情' onclick = 'toComment("+movie.id+")'/>";
                         if (${user.level == 1}) {
                             html += "<input type = 'button' value = '修改' onclick = 'update("+movie.id +")'/>";
                             /*html += "<input type = 'button' value = '删除' onclick = 'del("+movie.id +")'/>";*/
@@ -188,8 +188,7 @@
         <th>电影片长</th>
         <th>上线时间</th>
     </tr>
-<tbody id="tbd">
-    </tbody>
+<tbody id="tbd"></tbody>
 </table>
 <div id="pageDiv">
 </div>

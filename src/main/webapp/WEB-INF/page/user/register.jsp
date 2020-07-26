@@ -123,7 +123,7 @@
             $.post("<%=request.getContextPath()%>/user/register",$("#fm").serialize(),
                 function (data) {
                     layer.close(index);
-                    if (data.data != "200"){
+                    if (data.code != "200"){
                         layer.msg("注册失败");
                         return;
                     }

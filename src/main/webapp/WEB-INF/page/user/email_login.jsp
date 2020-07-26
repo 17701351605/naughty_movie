@@ -112,7 +112,7 @@
                 <input name="email" placeholder='邮箱' id="email" type='text' autocomplete="off"/>
             </div>
             <div class='login_fields__password'>
-                <div class='icon'><img src='<%=request.getContextPath()%>/static/img/key.png'></div>
+                <div class='icon'><img src='<%=request.getContextPath()%>/static/img/lock_icon_copy.png'></div>
                 <input name="code" placeholder='验证码' type='text' autocomplete="off">
             </div>
             <input type="submit" id="btnSendCode" value="发送验证码"/>

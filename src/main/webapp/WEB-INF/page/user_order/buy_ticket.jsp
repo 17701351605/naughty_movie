@@ -41,7 +41,7 @@
                         }
                         layer.msg(data.msg, {icon: 6, time: 2000},
                             function(){
-                                parent.location.href="<%=request.getContextPath()%>/userOrder/toShow";
+                                parent.location.href="<%=request.getContextPath()%>/index/toIndex";
                                 layer.close(index);
                             });
                     });
@@ -72,7 +72,7 @@
 
         /**取消购买*/
         function back(){
-            window.location.href="<%=request.getContextPath()%>/toMovieOffice?id="+${movie.id};
+            window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?id="+${movie.id};
         }
 
 

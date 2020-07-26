@@ -116,7 +116,7 @@ public class UserOrderController {
             LocalDateTime localDateTime = LocalDateTime.now();
             //如果当前时间大于电影开始的时间，无法退票
             if (System.currentTimeMillis() > movieOffice.getStartTime().toInstant(ZoneOffset.of("+8")).toEpochMilli()) {
-                return new ResultModel<>().error("电影已开场,您已操过退票时间,无法为您退票");
+                return new ResultModel<>().error("电影已开场,您已超过退票时间,无法为您退票");
             }
             //如果当前天小于电影开始的天可以退票
             if (localDateTime.getDayOfMonth() < movieOffice.getStartTime().getDayOfMonth()) {
@@ -125,7 +125,7 @@ public class UserOrderController {
             }
             if (localDateTime.getDayOfMonth() == movieOffice.getStartTime().getDayOfMonth()) {
                 if (localDateTime.getHour() > (movieOffice.getStartTime().getHour() - 3)) {
-                    return new ResultModel<>().error("请在电影开始时间前三个小时退票，您已操过退票时间,无法为您退票");
+                    return new ResultModel<>().error("请在电影开始时间前三个小时退票，您已超过退票时间,无法为您退票");
                 }
             }
             userOrderService.updateUserOrderAndUpdateMovieOffice(id, movieOffice, movie);

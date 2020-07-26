@@ -69,8 +69,7 @@ CREATE TABLE `movie_office` (
   `movie_name` varchar(255) DEFAULT NULL COMMENT '电影名称',
   `play_hall` int(11) DEFAULT NULL COMMENT '播放厅',
   `price` decimal(10,2) DEFAULT NULL COMMENT '电影票单价',
-  `
-seating` int(11) DEFAULT NULL COMMENT '影厅座位数',
+  `seating` int(11) DEFAULT NULL COMMENT '影厅座位数',
   `start_time` datetime DEFAULT NULL COMMENT '电影播放开始时间',
   `is_del` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)

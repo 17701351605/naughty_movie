@@ -9,7 +9,11 @@
 <html>
 <head>
     <title>Title</title>
+    <!--必要样式-->
+    <link href="<%=request.getContextPath()%>/static/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/static/css/demo.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/Particleground.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
     <script src="<%=request.getContextPath()%>/static/validate/dist/jquery.validate.js"></script>
 </head>
@@ -53,14 +57,15 @@
     });
     //去注册用户
     function toRegister() {
-        layer.open({
+        /*layer.open({
             type: 2,
             title: '注册用户',
             shadeClose: true,
             shade: 0.4,
-            area: ['500px', '80%'],
+            area: ['500px', '100%'],
             content: '<%=request.getContextPath()%>/user/toRegister'
-        });
+        });*/
+        window.location.href="<%=request.getContextPath()%>/user/toRegister";
     }
     //去邮箱验证码页面
     function toEmail() {
@@ -74,12 +79,37 @@
 </style>
 <body style="text-align: center">
 <form id="fm">
-    用户名：<input type="text" name="username"/><br/><br/>
+    <div class='login'>
+        <div class='login_title'><span>用户登录</span></div>
+        <div class='login_fields'>
+            <div class='login_fields__user'>
+                <div class='icon'><img src='<%=request.getContextPath()%>/static/img/user_icon_copy.png'></div>
+                <input name="username" placeholder='用户名' type='text' autocomplete="off"/>
+            </div>
+            <div class='login_fields__password'>
+                <div class='icon'><img src='<%=request.getContextPath()%>/static/img/lock_icon_copy.png'></div>
+                <input name="password" placeholder='密码' type='password' autocomplete="off">
+            </div>
+            <div class='login_fields__submit'>
+                <input type='submit' value='登录' onclick="login()"><br/>
+                <input type="button" value="去验证码登录" onclick="toEmail()"/><br/>
+                <input type="button" value="没有帐号？去添加" onclick="toRegister()"/>
+            </div>
+        </div>
+        <div class='disclaimer'><p>欢迎登陆点金淘气影城</p></div>
+    </div>
+    <%--用户名：<input type="text" name="username"/><br/><br/>
     密码：<input type="text" name="password"/><br/><br/>
-        <input type="submit" value="登录"/><br/><br/>
-        <input type="button" value="去验证码登录" onclick="toEmail()"/><br/><br/>
-        <input type="button" value="没有帐号？去添加" onclick="toRegister()"/><br/>
+        <input type="submit" value="登录"/><br/><br/>--%>
+
 
 </form>
 </body>
+<script type="text/javascript">
+    //粒子背景特效
+    $('body').particleground({
+        dotColor: '#E8DFE8',
+        lineColor: '#133b88'
+    });
+</script>
 </html>

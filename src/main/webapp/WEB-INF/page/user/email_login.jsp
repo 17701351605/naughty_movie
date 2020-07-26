@@ -9,7 +9,11 @@
 <html>
 <head>
     <title>Title</title>
+    <!--必要样式-->
+    <link href="<%=request.getContextPath()%>/static/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/static/css/demo.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/Particleground.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
     <script src="<%=request.getContextPath()%>/static/validate/dist/jquery.validate.js"></script>
 </head>
@@ -84,14 +88,7 @@
     }
     /** 注册用户*/
     function toRegister() {
-        layer.open({
-            type: 2,
-            title: '注册用户',
-            shadeClose: true,
-            shade: 0.4,
-            area: ['500px', '80%'],
-            content: '<%=request.getContextPath()%>/user/toRegister'
-        });
+        window.location.href="<%=request.getContextPath()%>/user/toRegister";
     }
     /** 去账号登陆页面*/
     function toLogin() {
@@ -106,12 +103,32 @@
 </style>
 <body style="text-align: center">
 <form id="fm">
-    邮箱：<input type="text" name="email" id="email"/><br/><br/>
-    验证码：<input type="text" name="code"/>
-        <input type="submit" id="btnSendCode" value="发送验证码"/><br/><br/>
-        <input type="button" onclick="codeLogin()" value="登录"/><br/><br/>
-        <input type="button" value="去账号登录" onclick="toLogin()"/><br/><br/>
-        <input type="button" value="没有帐号？去添加" onclick="toRegister()"/><br/>
+    <div class='login'>
+        <div class='login_title'><span>邮箱验证码登录</span></div>
+        <div class='login_fields'>
+            <div class='login_fields__user'>
+                <div class='icon'><img src='<%=request.getContextPath()%>/static/img/user_icon_copy.png'></div>
+                <input name="email" placeholder='邮箱' id="email" type='text' autocomplete="off"/>
+            </div>
+            <div class='login_fields__password'>
+                <div class='icon'><img src='<%=request.getContextPath()%>/static/img/key.png'></div>
+                <input name="code" placeholder='验证码' type='text' autocomplete="off">
+            </div>
+            <input type="submit" id="btnSendCode" value="发送验证码"/>
+            <div class='login_fields__submit'>
+                <input type='submit' value='登录' onclick="login()"><br/>
+                <input type="button" value="去账号登录" onclick="toLogin()"/><br/>
+                <input type="button" value="没有帐号？去添加" onclick="toRegister()"/>
+            </div>
+        </div>
+    </div>
 </form>
 </body>
+<script type="text/javascript">
+    //粒子背景特效
+    $('body').particleground({
+        dotColor: '#E8DFE8',
+        lineColor: '#133b88'
+    });
+</script>
 </html>

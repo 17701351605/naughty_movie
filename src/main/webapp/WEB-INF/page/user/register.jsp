@@ -9,7 +9,11 @@
 <html>
 <head>
     <title>Title</title>
+    <!--必要样式-->
+    <link href="<%=request.getContextPath()%>/static/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/static/css/demo.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/Particleground.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
     <script src="<%=request.getContextPath()%>/static/validate/dist/jquery.validate.js"></script>
 </head>
@@ -129,22 +133,91 @@
             });
         }
     });
+    /** 去账号登陆页面*/
+    function toLogin() {
+        window.location.href="<%=request.getContextPath()%>/user/toLogin";
+    }
+    /** 去邮箱验证码页面*/
+    function toEmail() {
+        window.location.href="<%=request.getContextPath()%>/user/toEmail";
+    }
 </script>
 <style>
     .error{
         color:red;
     }
+    .logins{
+        box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
+        opacity: 1;
+        top: 20px;
+        -webkit-transition-timing-function: cubic-bezier(0.68, -0.25, 0.265, 0.85);
+        -webkit-transition-property: -webkit-transform,opacity,box-shadow,top,left;
+        transition-property: transform,opacity,box-shadow,top,left;
+        -webkit-transition-duration: .5s;
+        transition-duration: .5s;
+        -webkit-transform-origin: 161px 100%;
+        -ms-transform-origin: 161px 100%;
+        transform-origin: 161px 100%;
+        -webkit-transform: rotateX(0deg);
+        transform: rotateX(0deg);
+        position: relative;
+        width: 300px;
+        height: 370px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        padding: 100px 40px 40px 40px;
+        background: #35394a;
+        background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #35394a), color-stop(100%, rgb(0, 0, 0)));
+        background: -webkit-linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%);
+        background: linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(53, 57, 74, 0)', endColorstr='rgb(0, 0, 0)',GradientType=1 );
+    }
 </style>
 <body style="text-align: center">
 <form id="fm">
-    用户名：<input type="text" name="username" id="username"/><br/><br/>
-    密码：<input type="text" name="password"/><br/><br/>
-    手机号：<input type="text" name="phoneNumber" id="phoneNumber"/><br/><br/>
-    邮箱：<input type="text" name="email" id="email"/><br/><br/>
-    级别：
-        普通用户<input type="radio" name="level" value="0"/>
-        商家<input type="radio" name="level" value="1"/><br/><br/>
-            <input type="submit" value="注册"/><br/><br/>
+    <div class='logins'>
+        <div class='login_title'><span>用户注册</span></div>
+        <div class='login_fields'>
+            <div class='login_fields__user'>
+                <div class='icon'><img src='<%=request.getContextPath()%>/static/img/user_icon_copy.png'></div>
+                <input name="username" placeholder='用户名' id="username" type='text' autocomplete="off"/>
+            </div>
+            <div class='login_fields__password'>
+                <div class='icon'><img src='<%=request.getContextPath()%>/static/img/lock_icon_copy.png'></div>
+                <input name="password" placeholder='密码' type='password' autocomplete="off">
+            </div>
+            <div class='login_fields__password'>
+                <div class='icon'><img src='<%=request.getContextPath()%>/static/img/user_icon_copy.png'></div>
+                <input name="phoneNumber" placeholder='手机号' id="phoneNumber" type='text' autocomplete="off">
+            </div>
+            <div class='login_fields__user'>
+                <div class='icon'><img src='<%=request.getContextPath()%>/static/img/user_icon_copy.png'></div>
+                <input name="email" placeholder='邮箱' id="email" type='text' autocomplete="off"/>
+            </div>
+            <div class='login_fields__password'>
+                &nbsp&nbsp&nbsp
+                级别：&nbsp
+                普通用户<input name="level" type="radio" value="0" autocomplete="off"/>
+                商家<input name="level" type="radio" value="1" autocomplete="off"/>
+            </div>
+            <div class='login_fields__submit'>
+                <input type='submit' value='注册'><br/>
+                <input type="button" value="去验证码登录" onclick="toEmail()"/><br/>
+                <input type="button" value="已有帐号？去登录" onclick="toLogin()"/>
+            </div>
+        </div>
+    </div>
 </form>
 </body>
+<script type="text/javascript">
+    //粒子背景特效
+    $('body').particleground({
+        dotColor: '#E8DFE8',
+        lineColor: '#133b88'
+    });
+</script>
 </html>

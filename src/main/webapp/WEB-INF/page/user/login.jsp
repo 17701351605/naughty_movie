@@ -78,7 +78,7 @@
         color:red;
     }
 </style>
-<body style="text-align: center">
+<body style="text-align: center;color: #0000FF">
 <form id="fm">
     <div class='login'>
         <div class='login_title'><span>用户登录</span></div>

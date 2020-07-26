@@ -28,7 +28,6 @@ public class MoviePageController {
     private BaseDataService baseDataService;
     @Autowired
     private MovieOfficeService movieOfficeService;
-
     @Autowired
     private MovieLikeService movieLikeService;
 
@@ -43,7 +42,7 @@ public class MoviePageController {
     public String toMovieDetail(@PathVariable Integer id, Model model, @SessionAttribute("user") User user) throws Exception {
         Movie movie = movieService.findMovieById(id);
         MovieLike movieLike = movieLikeService.findMovieLikeByUserIdAndMovieId(user.getId(), String.valueOf(id));
-        if (movieLike != null && movieLike.getScore() !=null) {
+        if (movieLike != null && movieLike.getScore() != null) {
             if (movieLike.getScore() != null) {
                 model.addAttribute("score", movieLike.getScore());
             } else {
@@ -54,17 +53,17 @@ public class MoviePageController {
         }
         //评分
         BigDecimal grade = movieLikeService.markGrade(id);
-        if (grade == null){
+        if (grade == null) {
             model.addAttribute("grade", "还未进行评分");
-        }else {
+        } else {
             model.addAttribute("grade", grade.setScale(1, BigDecimal.ROUND_HALF_UP));
         }
         //点赞数
         Integer like = movieLikeService.isLike(id);
-        if (grade == null){
+        if (grade == null) {
             model.addAttribute("like", "暂未点赞");
-        }else {
-            model.addAttribute("like",like);
+        } else {
+            model.addAttribute("like", like);
         }
         model.addAttribute("movie", movie);
         model.addAttribute("user", user);
@@ -90,76 +89,79 @@ public class MoviePageController {
      * @author: CYS
      */
     @RequestMapping("toMovieShow")
-    private String toMovieShow(Model model , @SessionAttribute("user") User user) throws Exception {
+    private String toMovieShow(Model model, @SessionAttribute("user") User user) throws Exception {
         List<BaseData> list = baseDataService.findAllByPId(1);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         model.addAttribute("list", list);
         return "movie/show";
     }
 
     /**
-     *去增加
+     * 去增加
+     *
      * @author: hwk
      */
     @RequestMapping("toAdd")
-    private String toAdd(Model model) throws Exception{
+    private String toAdd(Model model) throws Exception {
         List<BaseData> list = baseDataService.findAllByPId(1);
-        model.addAttribute("list",list);
+        model.addAttribute("list", list);
         return "movie/add";
     }
 
     /**
      * 电影的去修改
-     * @acthor :hwk
+     *
      * @param id
      * @param model
      * @return
      * @throws Exception
+     * @acthor :hwk
      */
     @RequestMapping("toUpdate/{id}")
-    public String toUpdate(@PathVariable Integer id, Model model) throws Exception{
+    public String toUpdate(@PathVariable Integer id, Model model) throws Exception {
         Movie movie = movieService.findMovieById(id);
-        if (movie.getTopTimeShow() !=null) {
+        if (movie.getTopTimeShow() != null) {
             String substring = movie.getTopTimeShow().substring(0, 19);
             movie.setTopTimeShow(substring);
         }
-        model.addAttribute("movie",movie);
+        model.addAttribute("movie", movie);
         List<BaseData> list = baseDataService.findAllByPId(1);
-        model.addAttribute("list",list);
+        model.addAttribute("list", list);
         return "movie/update";
     }
 
     /**
-     * @acthor :hwk
-     * 场次的去修改
      * @param id
      * @param model
      * @return
      * @throws Exception
+     * @acthor :hwk
+     * 场次的去修改
      */
     @RequestMapping("toUpdateById/{id}")
-    public String toUpdateById(@PathVariable Integer id, Model model) throws Exception{
+    public String toUpdateById(@PathVariable Integer id, Model model) throws Exception {
         MovieOffice movieOffice = movieOfficeService.findMovieOficeById(id);
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String format = timeFormatter.format(movieOffice.getStartTime());
-        model.addAttribute("officeList",baseDataService.findAllByPId(9));
-        model.addAttribute("startTime",format);
-        model.addAttribute("movieOffice",movieOffice);
+        model.addAttribute("officeList", baseDataService.findAllByPId(9));
+        model.addAttribute("startTime", format);
+        model.addAttribute("movieOffice", movieOffice);
         return "movie/update_movie_office";
     }
 
     /**
      * 去增加场次
+     *
      * @param id
      * @return
      */
     @RequestMapping("toMovieOfficeAdd")
-    public String toAdd( Integer id,Model model) throws Exception{
+    public String toAdd(Integer id, Model model) throws Exception {
         Movie movie = movieService.findMovieById(id);
         //电影信息
-        model.addAttribute("movie",movie);
+        model.addAttribute("movie", movie);
         //播放厅
-        model.addAttribute("officeList",baseDataService.findAllByPId(9));
+        model.addAttribute("officeList", baseDataService.findAllByPId(9));
         return "movie/add_movie_office";
     }
 

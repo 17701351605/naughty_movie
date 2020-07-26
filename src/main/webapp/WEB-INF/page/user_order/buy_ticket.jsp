@@ -85,7 +85,7 @@
     }
 
 </style>
-<body>
+<body style="text-align: center;color: #aa0000">
     <form id="fm">
         <input type="hidden" name="id" value="${movie.id}">
         <input type="hidden" name="movieId" value="${movie.movieId}">

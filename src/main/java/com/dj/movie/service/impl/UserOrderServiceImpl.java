@@ -28,9 +28,10 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
 
     /**
      * 添加用户购票记录和修改电影剩余座位
+     *
      * @param movieOffice 电影场次信息
-     * @param buyNum 购买数量
-     * @param buyPrice 购买总价
+     * @param buyNum      购买数量
+     * @param buyPrice    购买总价
      * @author fzz
      */
     @Override
@@ -49,15 +50,15 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
         userOrderMapper.insert(userOrder);
 
         UpdateWrapper<MovieOffice> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.set("seating",movieOffice.getSeating()-buyNum);
-        updateWrapper.eq("id",movieOffice.getId());
-        movieOfficeMapper.update(movieOffice,updateWrapper);
+        updateWrapper.set("seating", movieOffice.getSeating() - buyNum);
+        updateWrapper.eq("id", movieOffice.getId());
+        movieOfficeMapper.update(movieOffice, updateWrapper);
 
     }
 
     @Override
     public void updateUserOrderAndUpdateMovieOffice(Integer id, MovieOffice movieOffice, UserOrder movie) throws Exception {
-        userOrderMapper.updateUserOrderByStatus(2,id);
+        userOrderMapper.updateUserOrderByStatus(2, id);
         movieOffice.setSeating(movieOffice.getSeating() + movie.getBuyNumber());
         movieOfficeMapper.updateById(movieOffice);
     }
@@ -65,12 +66,12 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
 
     @Override
     public IPage<UserOrder> selectAllByUserId(IPage<UserOrder> orderPage, Integer id) throws Exception {
-        return userOrderMapper.selectAllByUserId(orderPage,id);
+        return userOrderMapper.selectAllByUserId(orderPage, id);
     }
 
     @Override
     public void updateUserOrderByStatus(Integer status, Integer id) throws Exception {
-        userOrderMapper.updateUserOrderByStatus(status,id);
+        userOrderMapper.updateUserOrderByStatus(status, id);
     }
 
     @Override

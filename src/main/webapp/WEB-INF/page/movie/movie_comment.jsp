@@ -56,7 +56,7 @@
                     layer.msg(data.msg, {icon: 6, time: 2000},
                         function(){
                             layer.close(index);
-                            return;
+                            location.href = "<%=request.getContextPath()%>/movie/toMovieDetail/" + ${movie.id};
                         });
                 })
         }

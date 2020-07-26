@@ -11,13 +11,13 @@ public interface MovieLikeService extends IService<MovieLike> {
 
     MovieLike findMovieLikeByUserIdAndMovieId(Integer userId, String MovieId) throws Exception;
 
-    void updateMovieLikeScore( Integer userId,  String MovieId, Integer score) throws Exception;
+    void updateMovieLikeScore(Integer userId, String MovieId, Integer score) throws Exception;
 
-    void addMovieLike (Integer userId, String MovieId, Integer score) throws Exception;
+    void addMovieLike(Integer userId, String MovieId, Integer score) throws Exception;
 
     void updateMovieLikeIsLike(Integer userId, String MovieId, Integer isLike) throws Exception;
 
-    void addMovieLikeByUserIdAndMovieId (Integer userId, String MovieId, Integer isLike) throws Exception;
+    void addMovieLikeByUserIdAndMovieId(Integer userId, String MovieId, Integer isLike) throws Exception;
 
     BigDecimal markGrade(Integer id) throws Exception;
 

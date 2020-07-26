@@ -166,7 +166,7 @@
     </script>
 </head>
 <%--<input type="button" value="我的影票" onclick="myMovie()"/>--%>
-<body style="text-align:center">
+<body style="text-align:center;color: #BEE9F0">
 <form id="fm">
     <c:if test="${user.level == 1}">
         <input type="button" value='增加电影' onclick='addMovie()'/><br/>

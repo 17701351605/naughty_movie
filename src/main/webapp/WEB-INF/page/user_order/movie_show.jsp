@@ -92,7 +92,7 @@
         }
     </script>
 </head>
-<body style="text-align: center">
+<body style="text-align: center;color: #aa0000">
 <input type = "hidden" value = "1" id = "page"/>
 <table border="1px" cellpadding="20px" cellspacing="0px" align="center">
     <tr>

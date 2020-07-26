@@ -27,18 +27,19 @@ public class UserOrderPageController {
 
     /**
      * 去购票
+     *
      * @param id 场次ID
-     * @author fzz
      * @return
+     * @author fzz
      */
     @RequestMapping("toByTicket/{id}")
-    public String toByTicket(@PathVariable Integer id, Model model) throws Exception{
+    public String toByTicket(@PathVariable Integer id, Model model) throws Exception {
         QueryWrapper<BaseData> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("parent_id",9);
+        queryWrapper.eq("parent_id", 9);
         //该场次的电影信息
-        model.addAttribute("movie",movieOfficeService.getById(id));
+        model.addAttribute("movie", movieOfficeService.getById(id));
         //从数据库获取厅信息
-        model.addAttribute("movieOfficeList",baseDataService.list(queryWrapper));
+        model.addAttribute("movieOfficeList", baseDataService.list(queryWrapper));
         return "user_order/buy_ticket";
     }
 

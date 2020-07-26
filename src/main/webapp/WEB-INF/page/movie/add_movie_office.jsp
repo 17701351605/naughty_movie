@@ -71,7 +71,7 @@
         color:red;
     }
 </style>
-<body style="text-align: center">
+<body style="text-align: center;color: #BEE9F0">
 <form id="fm">
     <input type="hidden" name ="movieId" value="${movie.id}">
     <input type="hidden" name ="movieName" value="${movie.movieName}">

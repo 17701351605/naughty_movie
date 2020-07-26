@@ -11,6 +11,7 @@ import com.dj.movie.service.MovieService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 /**
@@ -23,12 +24,11 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
     private MovieMapper movieMapper;
 
 
-
     @Override
-    public List<Movie> findMovieAll(MovieQuery query, String movieName , Integer status, Integer[] movieType, User user) {
+    public List<Movie> findMovieAll(MovieQuery query, String movieName, Integer status, Integer[] movieType, User user) {
         IPage<Movie> page1 = new Page<>(query.getPageNo(), query.getPageSize());
         // 分页后的信息
-        IPage<Movie> pageInfo = getBaseMapper().findMovieAll(page1, query, movieName, status, movieType,user);
+        IPage<Movie> pageInfo = getBaseMapper().findMovieAll(page1, query, movieName, status, movieType, user);
         query.setPages((int) pageInfo.getPages());
         List<Movie> movieList = pageInfo.getRecords();
         return movieList;

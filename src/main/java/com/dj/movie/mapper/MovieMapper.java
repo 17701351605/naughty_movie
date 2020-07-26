@@ -22,14 +22,9 @@ public interface MovieMapper extends BaseMapper<Movie> {
     Movie findMovieByMovieId(Integer id) throws DataFormatException;
 
     /**
-     * 自定义SQL分页
-     *
-     * @param page 分页信息
-     * @param query 查询条件
-     * @return
+     * 自定义SQL分页 分页信息 @param query 查询条件
      */
-
-    IPage<Movie> findMovieAll(IPage<Movie> page, @Param("query") MovieQuery query, @Param("movieName") String movieName, @Param("status") Integer status, @Param("movieType") Integer[] movieType, @Param("user")User user);
+    IPage<Movie> findMovieAll(IPage<Movie> page, @Param("query") MovieQuery query, @Param("movieName") String movieName, @Param("status") Integer status, @Param("movieType") Integer[] movieType, @Param("user") User user);
 
     Movie findMovieById(Integer id) throws DataAccessException;
 }

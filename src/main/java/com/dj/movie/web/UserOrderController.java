@@ -34,19 +34,20 @@ public class UserOrderController {
 
     /**
      * 添加用户购买记录和减该播放厅剩余票数
+     *
      * @param movieOffice
-     * @param buyNum 购买数量
-     * @param buyPrice 购买总价
-     * @param user 购买人（登录人）
+     * @param buyNum      购买数量
+     * @param buyPrice    购买总价
+     * @param user        购买人（登录人）
      * @author fzz
      */
     @RequestMapping("addOrder")
     public ResultModel addOrder(MovieOffice movieOffice, Integer buyNum, BigDecimal buyPrice,
-                                @SessionAttribute("user")User user){
-        try{
-            userOrderService.addUserOrderAndUpdateMovieSeating(movieOffice,buyNum,buyPrice,user.getId());
+                                @SessionAttribute("user") User user) {
+        try {
+            userOrderService.addUserOrderAndUpdateMovieSeating(movieOffice, buyNum, buyPrice, user.getId());
             return new ResultModel().success("购票成功");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel().error("系统异常，请稍后再试");
         }
@@ -55,19 +56,20 @@ public class UserOrderController {
     /**
      * 1.根据播放厅主键ID查出该电影此播放厅信息
      * 2.进行添加用户购买记录和减该播放厅剩余票数
-     * @param id 播放厅主键ID
+     *
+     * @param id   播放厅主键ID
      * @param user 登录用户
      * @author fzz
      */
     @RequestMapping("tuanGou/{id}")
-    public ResultModel tuanGou(@PathVariable Integer id, @SessionAttribute("user")User user){
-        try{
+    public ResultModel tuanGou(@PathVariable Integer id, @SessionAttribute("user") User user) {
+        try {
             MovieOffice movieOffice = movieOfficeService.getById(id);
             Integer buyNum = movieOffice.getSeating();
             BigDecimal buyPrice = movieOffice.getPrice().multiply(BigDecimal.valueOf(buyNum)).multiply(BigDecimal.valueOf(0.8));
-            addOrder(movieOffice,buyNum,buyPrice,user);
+            addOrder(movieOffice, buyNum, buyPrice, user);
             return new ResultModel().success("购票成功");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel().error("系统异常，请稍后再试");
         }
@@ -75,19 +77,20 @@ public class UserOrderController {
 
     /**
      * 查询全部
-     * @param a
+     *
+     * @param
      * @param page
      * @return
      */
     @RequestMapping("list")
-    public ResultModel list(@SessionAttribute("user") User user , Integer page) {
+    public ResultModel list(@SessionAttribute("user") User user, Integer page) {
         try {
-            Map<String,Object> map = new HashMap<>();
+            Map<String, Object> map = new HashMap<>();
             Page<UserOrder> orderPage = new Page<>();
             orderPage.setCurrent(page);
             IPage<UserOrder> iPage = userOrderService.selectAllByUserId(orderPage, user.getId());
-            map.put("list",iPage.getRecords());
-            map.put("pages",iPage.getPages());
+            map.put("list", iPage.getRecords());
+            map.put("pages", iPage.getPages());
             return new ResultModel().success(map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,6 +101,7 @@ public class UserOrderController {
 
     /**
      * 退票操作
+     *
      * @param id
      * @return
      */
@@ -116,7 +120,7 @@ public class UserOrderController {
             }
             //如果当前天小于电影开始的天可以退票
             if (localDateTime.getDayOfMonth() < movieOffice.getStartTime().getDayOfMonth()) {
-                userOrderService.updateUserOrderAndUpdateMovieOffice(id,movieOffice,movie);
+                userOrderService.updateUserOrderAndUpdateMovieOffice(id, movieOffice, movie);
                 return new ResultModel<>().success("退票成功");
             }
             if (localDateTime.getDayOfMonth() == movieOffice.getStartTime().getDayOfMonth()) {
@@ -124,7 +128,7 @@ public class UserOrderController {
                     return new ResultModel<>().error("请在电影开始时间前三个小时退票，您已操过退票时间,无法为您退票");
                 }
             }
-            userOrderService.updateUserOrderAndUpdateMovieOffice(id,movieOffice,movie);
+            userOrderService.updateUserOrderAndUpdateMovieOffice(id, movieOffice, movie);
             return new ResultModel<>().success("退票成功");
         } catch (Exception e) {
             e.printStackTrace();

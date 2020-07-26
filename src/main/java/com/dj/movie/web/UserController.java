@@ -27,17 +27,18 @@ public class UserController {
 
     /**
      * 登录
+     *
      * @Param user
      * @Return
      * @Author Caohj
      * @Date
      */
     @RequestMapping("login")
-    public ResultModel login(User user, HttpSession session){
+    public ResultModel login(User user, HttpSession session) {
         try {
             User user1 = userService.findNameAndPwd(user);
-            if (null == user1){
-                return new ResultModel().error(0,"账户或密码有误，请重新输入");
+            if (null == user1) {
+                return new ResultModel().error(0, "账户或密码有误，请重新输入");
             }
             session.setAttribute("user", user1);
             return new ResultModel().success();
@@ -49,6 +50,7 @@ public class UserController {
 
     /**
      * 判断用户是否存在
+     *
      * @Param user
      * @Return boolean
      * @Author Caohj
@@ -68,29 +70,31 @@ public class UserController {
 
     /**
      * 注册用户
+     *
      * @Param
      * @Return
      * @Author Caohj
      * @Date
      */
     @RequestMapping("register")
-    public ResultModel register(User user){
+    public ResultModel register(User user) {
         userService.save(user);
         return new ResultModel().success();
     }
 
     /**
      * 发送邮箱验证码
+     *
      * @Param
      * @Return
      * @Author Caohj
      * @Date
      */
     @RequestMapping("sendEmail")
-    public ResultModel sendEmail(User user){
+    public ResultModel sendEmail(User user) {
         try {
             User user1 = userService.findUserByName(user);
-            if (null == user1){
+            if (null == user1) {
                 return new ResultModel().success(0, "该用户不存在请重新输入");
             }
             //生成验证码
@@ -111,22 +115,23 @@ public class UserController {
 
     /**
      * 邮箱验证码登录
+     *
      * @Return
      * @Author Caohj
      * @Date
      */
     @RequestMapping("codeLogin")
-    public ResultModel codeLogin(User user, HttpSession session){
+    public ResultModel codeLogin(User user, HttpSession session) {
         try {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("email", user.getEmail());
             queryWrapper.eq("code", user.getCode());
             User user1 = userService.getOne(queryWrapper);
-            if (null == user1){
-                return new ResultModel().error(0,"邮箱或验证码有误，请重新输入");
+            if (null == user1) {
+                return new ResultModel().error(0, "邮箱或验证码有误，请重新输入");
             }
-            if (System.currentTimeMillis() > user1.getCodeTime().toInstant(ZoneOffset.of("+8")).toEpochMilli()){
-                return new ResultModel().error(0,"验证码已失效，请重新获取");
+            if (System.currentTimeMillis() > user1.getCodeTime().toInstant(ZoneOffset.of("+8")).toEpochMilli()) {
+                return new ResultModel().error(0, "验证码已失效，请重新获取");
             }
             session.setAttribute("user", user1);
             return new ResultModel().success();

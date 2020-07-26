@@ -92,7 +92,7 @@
         color:red;
     }
 </style>
-<body style="text-align: center">
+<body style="text-align: center;color: #BEE9F0">
 <form id="fm">
     <input type="hidden" name="id" value="${movieOffice.id}" />
 
@@ -109,7 +109,7 @@
     <input class="Wdate" type="text"  value="${startTime}" name="startTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+1}'})" ><br/>
    <%-- <input type="text" name="startTime" value="${startTime}" /><br/>--%>
 
-    剩余座位:<input type="text" name="number" value="${movieOffice.seating}" /><br/>
+    剩余座位:${movieOffice.seating} <input type="hidden" name="number" value="${movieOffice.seating}" /><br/>
 
     单价:<input type="text" name="price" value="${movieOffice.price}" /><br/>
 

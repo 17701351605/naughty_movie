@@ -71,7 +71,7 @@
         color:red;
     }
 </style>
-<body style="text-align: center">
+<body style="text-align: center;color: #BEE9F0">
 <form id="fm">
     电影名称:<input type="text" name="movieName"/><br/>
     电影类型：

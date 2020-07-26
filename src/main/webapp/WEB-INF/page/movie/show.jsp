@@ -93,7 +93,7 @@
                 title: '修改',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['500px', '90%'],
+                area: ['500px', '53%'],
                 content:"<%=request.getContextPath()%>/movie/toUpdate/"+id,
             });
         }
@@ -165,7 +165,6 @@
 
     </script>
 </head>
-<body style="text-align:center;background:url(<%=request.getContextPath()%>/static/img/3.jpg)">
 <%--<input type="button" value="我的影票" onclick="myMovie()"/>--%>
 <body style="text-align:center">
 <form id="fm">

@@ -14,7 +14,7 @@ setInterval("$('#dateTime').html(new Date().toLocaleString()+'星期'+'日一二
 })
 </script>
 </head>
-<body>
+<body style="text-align:center;color: #BEE9F0">
 	<br/>
 	<%--<a href = "<%=request.getContextPath()%>/user/out">退出登录</a>--%>
 	<marquee><h2 align="center">欢迎进入点金淘气影院</h2></marquee>

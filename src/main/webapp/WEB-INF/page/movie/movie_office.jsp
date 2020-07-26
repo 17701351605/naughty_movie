@@ -142,9 +142,9 @@
     </c:if>
     场次查询：
     开始时间：
-    <input class="Wdate" type="text" name="startingTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+1}'})" >
+    <input class="Wdate" type="text" name="startingTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" >
 ~
-    <input class="Wdate" type="text" name="endTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+1}'})" ><br>
+    <input class="Wdate" type="text" name="endTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" ><br>
 
     <input type="button" value="查询" onclick="search()"/>
 </form>

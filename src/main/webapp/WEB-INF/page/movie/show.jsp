@@ -62,7 +62,6 @@
 
         //跳电影详情展示
         function toComment(id) {
-            alert(id);
             location.href = "<%=request.getContextPath()%>/movie/toMovieDetail/" + id;
         }
 
@@ -131,10 +130,10 @@
                 content:"<%=request.getContextPath()%>/movie/toAdd",
             });
         }
-        //跳用户订单展示
+        /*//跳用户订单展示
         function myMovie(){
             location.href = "<%=request.getContextPath()%>/userOrder/toShow"
-        }
+        }*/
 
 
         function selectMovie() {
@@ -164,7 +163,7 @@
 
     </script>
 </head>
-<input type="button" value="我的影票" onclick="myMovie()"/>
+<%--<input type="button" value="我的影票" onclick="myMovie()"/>--%>
 <body style="text-align:center">
 <form id="fm">
     <c:if test="${user.level == 1}">

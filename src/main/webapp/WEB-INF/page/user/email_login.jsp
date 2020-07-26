@@ -81,7 +81,7 @@
                 }
                 layer.msg('登录成功！', {icon: 6, time: 2000},
                     function(){
-                        window.location.href="<%=request.getContextPath()%>/movie/toMovieShow";
+                        window.location.href="<%=request.getContextPath()%>/index/toIndex";
                     });
             }
         );

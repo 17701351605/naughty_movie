@@ -37,6 +37,11 @@ public class UserPageController {
         return "user/register";
     }
 
+    @RequestMapping("toHome")
+    public String toHome(){
+        return "user/home";
+    }
+
 
 
 

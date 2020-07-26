@@ -51,7 +51,7 @@
                         layer.msg(data.msg);
                         return;
                     }
-                    window.location.href="<%=request.getContextPath()%>/movie/toMovieShow";
+                    window.location.href="<%=request.getContextPath()%>/index/toIndex";
             });
         }
     });

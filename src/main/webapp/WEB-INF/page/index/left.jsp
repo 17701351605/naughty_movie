@@ -7,11 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="color: #beeef0">
 	<br/><br/>
-	<a href = "<%=request.getContextPath()%>/movie/toMovieShow" target = "right">电影展示</a><br/><br/><br/><br/>
+	<a href = "<%=request.getContextPath()%>/movie/toMovieShow" target = "right"><p style="color:#beeef0 ">电影展示</p></a><br/><br/><br/><br/>
 	<c:if test="${user.level == 0}">
-		<a href = "<%=request.getContextPath()%>/userOrder/toShow" target = "right">我的影票</a><br/>
+		<a href = "<%=request.getContextPath()%>/userOrder/toShow" target = "right"><p style="color:#beeef0 ">我的影集</p></a><br/>
 	</c:if>
 </body>
 </html>

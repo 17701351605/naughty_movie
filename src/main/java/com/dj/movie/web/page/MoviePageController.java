@@ -141,10 +141,12 @@ public class MoviePageController {
     @RequestMapping("toUpdateById/{id}")
     public String toUpdateById(@PathVariable Integer id, Model model) throws Exception {
         MovieOffice movieOffice = movieOfficeService.findMovieOficeById(id);
+        Movie movie = movieService.findMovieById(Integer.valueOf(movieOffice.getMovieId()));
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String format = timeFormatter.format(movieOffice.getStartTime());
         model.addAttribute("officeList", baseDataService.findAllByPId(9));
         model.addAttribute("startTime", format);
+        model.addAttribute("movie", movie);
         model.addAttribute("movieOffice", movieOffice);
         return "movie/update_movie_office";
     }

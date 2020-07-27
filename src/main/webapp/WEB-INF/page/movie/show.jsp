@@ -166,7 +166,7 @@
     </script>
 </head>
 <%--<input type="button" value="我的影票" onclick="myMovie()"/>--%>
-<body style="text-align:center;color: #BEE9F0">
+<body style="text-align:center;color: #a7eaa0">
 <form id="fm">
     <c:if test="${user.level == 1}">
         <input type="button" value='增加电影' onclick='addMovie()'/><br/>
@@ -180,13 +180,14 @@
     </c:forEach>
     <input type="button" value="查询" onclick="selectMovie()">
 </form>
-<table align="center">
+<table border="1px" cellpadding="20px" cellspacing="0px" align="center">
     <tr>
         <th>电影名称</th>
         <th>演员名单</th>
         <th>电影类型</th>
         <th>电影片长</th>
         <th>上线时间</th>
+        <th>操作</th>
     </tr>
 <tbody id="tbd"></tbody>
 </table>

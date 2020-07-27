@@ -137,7 +137,7 @@
         }
     </script>
 </head>
-<body style="text-align: center">
+<body style="text-align: center;color: #00FF00">
 <form id="fm">
     <input type="hidden" name="movieId" value="${movieId}"/>
     <c:if test="${user.level == 1}">

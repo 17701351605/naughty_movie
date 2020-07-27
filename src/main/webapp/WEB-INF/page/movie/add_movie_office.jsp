@@ -83,7 +83,7 @@
             </c:forEach>
         </select>
     <br/>
-    开始时间：<input class="Wdate" type="text" name="startTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+1}'})" ><br>
+    开始时间：<input class="Wdate" type="text" name="startTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'${movie.topTimeShow}'})" ><br>
     单价：<input type="text" name="price"/><br/>
     <input type="hidden" name="seating" value="50"/>
     <input type="hidden" name="isDel" value="1"/>

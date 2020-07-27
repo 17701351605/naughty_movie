@@ -106,7 +106,7 @@
     </select><br/>
 
     开始时间:
-    <input class="Wdate" type="text"  value="${startTime}" name="startTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+1}'})" ><br/>
+    <input class="Wdate" type="text"  value="${startTime}" name="startTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'${movie.topTimeShow}'})" ><br/>
    <%-- <input type="text" name="startTime" value="${startTime}" /><br/>--%>
 
     剩余座位:${movieOffice.seating} <input type="hidden" name="number" value="${movieOffice.seating}" /><br/>

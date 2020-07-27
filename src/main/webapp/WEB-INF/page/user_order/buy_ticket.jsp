@@ -72,7 +72,7 @@
 
         /**取消购买*/
         function back(){
-            window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?id="+${movie.id};
+            window.location.href="<%=request.getContextPath()%>/movie/toMovieOffice?id="+${movie.movieId};
         }
 
 

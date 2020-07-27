@@ -152,7 +152,7 @@
         }
     </style>
 </head>
-<body style="text-align:center;color: #BEE9F0">
+<body style="text-align:center;color: #dc7923">
 <div id="test1"></div>
 电影名称:${movie.movieName} <br/>
 电影片长：${movie.longTime} <br/>
